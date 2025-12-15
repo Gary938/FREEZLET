@@ -1,0 +1,231 @@
+/* UI/LearnMode/Components/WriteQuestion/CSS/writeQuestion.css */
+/* Styles for Write Mode - text answer input mode */
+
+/* ======= MAIN CONTAINER ======= */
+.write-question-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* ======= QUESTION TEXT ======= */
+.write-question-text {
+    width: fit-content;
+    max-width: 100%;
+    font-size: 34px;
+    font-family: 'Segoe UI', sans-serif;
+    color: #ecf4ff;
+    font-weight: 600;
+    text-align: center;
+    margin: 10px auto 25px;
+    padding: 12px 20px;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    background-color: rgba(30, 31, 42, 0.5);
+    border: 2px solid #446;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 174, 255, 0.2);
+}
+
+/* ======= HINTS CONTAINER (ANSWER OPTIONS) ======= */
+.write-hints-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 25px;
+    padding: 15px;
+    background-color: rgba(30, 31, 42, 0.4);
+    border: 2px dashed #556;
+    border-radius: 10px;
+}
+
+.write-hints-title {
+    font-size: 14px;
+    color: #8899aa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.write-hints-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.write-hint-item {
+    padding: 8px 16px;
+    background-color: rgba(40, 45, 60, 0.6);
+    border: 1px solid #557;
+    border-radius: 8px;
+    color: #aabbcc;
+    font-size: 20px;
+    font-family: 'Segoe UI', sans-serif;
+    transition: all 0.2s ease;
+}
+
+.write-hint-item:hover {
+    background-color: rgba(50, 55, 70, 0.8);
+    border-color: #668;
+    color: #ccddee;
+}
+
+/* ======= INPUT FORM ======= */
+.write-input-form {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin: 0 auto;
+}
+
+/* ======= INPUT FIELD ======= */
+.write-answer-input {
+    width: 100%;
+    min-height: 60px;
+    font-size: 28px;
+    font-family: 'Segoe UI', sans-serif;
+    color: #ecf4ff;
+    background-color: rgba(30, 31, 42, 0.6);
+    border: 2px solid #446;
+    border-radius: 10px;
+    padding: 12px 20px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 174, 255, 0.2);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.write-answer-input::placeholder {
+    color: #667788;
+    font-style: italic;
+}
+
+.write-answer-input:focus {
+    border-color: #4cc4f3;
+    box-shadow: 0 0 15px rgba(76, 196, 243, 0.4);
+    background-color: rgba(35, 38, 50, 0.8);
+}
+
+/* Correct answer state */
+.write-answer-input.correct {
+    border-color: #28a745 !important;
+    background-color: rgba(31, 77, 46, 0.6) !important;
+    box-shadow: 0 0 20px rgba(40, 167, 69, 0.5) !important;
+    animation: correctPulse 0.5s ease;
+}
+
+/* Incorrect answer state */
+.write-answer-input.incorrect {
+    border-color: #dc3545 !important;
+    background-color: rgba(120, 40, 40, 0.6) !important;
+    box-shadow: 0 0 20px rgba(220, 53, 69, 0.5) !important;
+    animation: shake 0.5s ease;
+}
+
+/* ======= SUBMIT BUTTON ======= */
+.write-submit-btn {
+    padding: 12px 40px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Segoe UI', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid #4cc4f3;
+    background: transparent;
+    color: #4cc4f3;
+    text-shadow: 0 0 6px rgba(76, 196, 243, 0.5);
+    box-shadow: 0 0 10px rgba(76, 196, 243, 0.4);
+}
+
+.write-submit-btn:hover {
+    background-color: rgba(76, 196, 243, 0.2);
+    box-shadow: 0 0 15px rgba(76, 196, 243, 0.6);
+    transform: scale(1.05);
+}
+
+.write-submit-btn:active {
+    transform: scale(0.98);
+}
+
+.write-submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ======= FEEDBACK ======= */
+.write-feedback {
+    min-height: 30px;
+    margin-top: 15px;
+    font-size: 18px;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.write-feedback.correct-feedback {
+    color: #28a745;
+    text-shadow: 0 0 10px rgba(40, 167, 69, 0.6);
+}
+
+.write-feedback.incorrect-feedback {
+    color: #dc3545;
+    text-shadow: 0 0 10px rgba(220, 53, 69, 0.6);
+}
+
+/* ======= ANIMATIONS ======= */
+
+/* Shake on incorrect answer */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); }
+    20%, 40%, 60%, 80% { transform: translateX(8px); }
+}
+
+/* Pulse on correct answer */
+@keyframes correctPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(40, 167, 69, 0);
+    }
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 0 30px rgba(40, 167, 69, 0.6);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(40, 167, 69, 0.5);
+    }
+}
+
+/* ======= RESPONSIVENESS ======= */
+@media (max-width: 600px) {
+    .write-question-text {
+        font-size: 26px;
+        padding: 10px 15px;
+    }
+
+    .write-answer-input {
+        font-size: 22px;
+        min-height: 50px;
+    }
+
+    .write-hint-item {
+        font-size: 16px;
+        padding: 6px 12px;
+    }
+
+    .write-submit-btn {
+        font-size: 18px;
+        padding: 10px 30px;
+    }
+}

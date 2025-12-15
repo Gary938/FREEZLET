@@ -1,0 +1,1113 @@
+/* mainTable.css — styles for main table and buttons */
+
+/* Import modal window styles */
+@import './modalStyles.css';
+
+/* === ARCADE STYLE === */
+/* Note: external fonts disabled due to CSP, using system monospace */
+
+/* CSS variable for dynamic text color (depends on background) */
+:root {
+  --ui-text-color: #AABBCC;  /* fallback - will be overwritten by JS */
+}
+
+/* Base styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================================
+   GLASSMORPHISM for main menu
+   ============================================ */
+
+/* Category side panel - glassmorphism */
+#folderList {
+  background: rgba(0, 0, 0, 0.05) !important;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  color: var(--ui-text-color);
+  border-right: 1px solid rgba(255, 255, 255, 0.10) !important;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+  padding: 16px;
+  width: clamp(180px, 22%, 260px);
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden; /* Remove horizontal scroll */
+  max-height: 100vh;
+  scrollbar-gutter: stable; /* Always reserve space for scrollbar */
+}
+
+/* Main view - glassmorphism */
+#mainView {
+  background: rgba(0, 0, 0, 0.05) !important;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  color: var(--ui-text-color);
+  border-radius: 16px;
+  margin: 20px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  flex-grow: 1;
+  overflow-y: auto;
+  max-height: calc(100vh - 40px);
+  box-sizing: border-box;
+}
+
+/* Title */
+#mainView h1 {
+  color: var(--ui-text-color);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  margin-top: 0;
+}
+
+/* === FREEZLET LOGO === */
+.freezlet-logo {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+  font-size: 48px !important;
+  font-weight: bold !important;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 2px;
+}
+
+.freezlet-logo span {
+  display: inline-block;
+  text-shadow:
+    0 0 10px currentColor,
+    0 0 20px currentColor,
+    0 0 40px currentColor;
+  animation: letter-dance 2s ease-in-out infinite, glow-shift 4s ease-in-out infinite;
+}
+
+/* Individual Pac-Man ghost colors and wave delays */
+.freezlet-logo span:nth-child(1) { color: #00FFFF; animation-delay: 0s, 0s; }      /* F - Inky */
+.freezlet-logo span:nth-child(2) { color: #FF6666; animation-delay: 0.1s, 0.1s; }  /* R - Blinky */
+.freezlet-logo span:nth-child(3) { color: #FFCCFF; animation-delay: 0.2s, 0.2s; }  /* E - Pinky */
+.freezlet-logo span:nth-child(4) { color: #FFCC77; animation-delay: 0.3s, 0.3s; }  /* E - Clyde */
+.freezlet-logo span:nth-child(5) { color: #FFFF66; animation-delay: 0.4s, 0.4s; }  /* Z - Pac-Man */
+.freezlet-logo span:nth-child(6) { color: #00FF88; animation-delay: 0.5s, 0.5s; }  /* L - Matrix */
+.freezlet-logo span:nth-child(7) { color: #00FFFF; animation-delay: 0.6s, 0.6s; }  /* E - Inky */
+.freezlet-logo span:nth-child(8) { color: #FF6666; animation-delay: 0.7s, 0.7s; }  /* T - Blinky */
+
+/* "Letter dance" animation - bouncing wave */
+@keyframes letter-dance {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.1);
+    filter: brightness(1.3);
+  }
+}
+
+/* Pulsating neon glow animation */
+@keyframes glow-shift {
+  0%, 100% {
+    text-shadow:
+      0 0 10px currentColor,
+      0 0 20px currentColor,
+      0 0 40px currentColor;
+  }
+  50% {
+    text-shadow:
+      0 0 15px currentColor,
+      0 0 30px currentColor,
+      0 0 60px currentColor,
+      0 0 80px currentColor;
+  }
+}
+
+/* ============================================
+   ARCADE STYLE: Pac-Man ghost style buttons
+   ============================================ */
+
+/* Base styles for all main menu buttons */
+.action-buttons button {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 12px 18px;
+  border: 2px solid;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Shine effect on hover (::before) */
+.action-buttons button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  pointer-events: none;
+}
+
+.action-buttons button:hover::before {
+  animation: btn-shine 0.8s ease-out forwards;
+}
+
+@keyframes btn-shine {
+  to { left: 150%; }
+}
+
+/* Power-up effect on hover (::after) */
+.action-buttons button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.action-buttons button:hover::after {
+  width: 250%;
+  height: 250%;
+}
+
+/* === GHOST COLORS: Each button - its own ghost === */
+
+/* Load New Test - Inky (cyan) */
+#loadBtn {
+  background: linear-gradient(180deg, #1a4d4d 0%, #0d3333 100%);
+  border-color: #00DDDD;
+  color: #00FFFF;
+  box-shadow: 0 4px 15px rgba(0, 255, 255, 0.25);
+}
+
+#loadBtn:hover {
+  background: linear-gradient(180deg, #2a5d5d 0%, #1a4444 100%);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.5), 0 4px 20px rgba(0, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Delete Selected Tests - Blinky (red) */
+#deleteTest {
+  background: linear-gradient(180deg, #4d1a1a 0%, #330d0d 100%);
+  border-color: #FF4444;
+  color: #FF6666;
+  box-shadow: 0 4px 15px rgba(255, 68, 68, 0.25);
+}
+
+#deleteTest:hover {
+  background: linear-gradient(180deg, #5d2a2a 0%, #441a1a 100%);
+  box-shadow: 0 0 25px rgba(255, 68, 68, 0.5), 0 4px 20px rgba(255, 68, 68, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Merge Tests - Pinky (pink) */
+#mergeTests {
+  background: linear-gradient(180deg, #4d3344 0%, #332233 100%);
+  border-color: #FFB8FF;
+  color: #FFCCFF;
+  box-shadow: 0 4px 15px rgba(255, 184, 255, 0.25);
+}
+
+#mergeTests:hover {
+  background: linear-gradient(180deg, #5d4355 0%, #443344 100%);
+  box-shadow: 0 0 25px rgba(255, 184, 255, 0.5), 0 4px 20px rgba(255, 184, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Start Test - Clyde (orange) */
+#startTest {
+  background: linear-gradient(180deg, #4d3311 0%, #332200 100%);
+  border-color: #FFB852;
+  color: #FFCC77;
+  box-shadow: 0 4px 15px rgba(255, 184, 82, 0.25);
+}
+
+#startTest:hover {
+  background: linear-gradient(180deg, #5d4422 0%, #443311 100%);
+  box-shadow: 0 0 25px rgba(255, 184, 82, 0.5), 0 4px 20px rgba(255, 184, 82, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Learning Mode - Pac-Man (yellow) */
+#learningBtn {
+  background: linear-gradient(180deg, #4d4d00 0%, #333300 100%);
+  border-color: #FFFF00;
+  color: #FFFF66;
+  box-shadow: 0 4px 15px rgba(255, 255, 0, 0.25);
+}
+
+#learningBtn:hover {
+  background: linear-gradient(180deg, #5d5d11 0%, #444400 100%);
+  box-shadow: 0 0 25px rgba(255, 255, 0, 0.5), 0 4px 20px rgba(255, 255, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+/* === PICK ME! Animation for Learning Mode when test selected === */
+#learningBtn.pick-me {
+  animation: pick-me-wiggle 0.5s ease-in-out infinite, pick-me-glow 1.5s ease-in-out infinite;
+  position: relative;
+}
+
+/* Wiggle */
+@keyframes pick-me-wiggle {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(-3deg) scale(1.02);
+  }
+  75% {
+    transform: rotate(3deg) scale(1.02);
+  }
+}
+
+/* Pulsating glow with expanding ring */
+@keyframes pick-me-glow {
+  0%, 100% {
+    box-shadow:
+      0 4px 15px rgba(255, 255, 0, 0.4),
+      0 0 20px rgba(255, 255, 0, 0.3),
+      inset 0 0 10px rgba(255, 255, 0, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 4px 25px rgba(255, 255, 0, 0.7),
+      0 0 40px rgba(255, 255, 0, 0.5),
+      0 0 60px rgba(255, 255, 0, 0.3),
+      inset 0 0 15px rgba(255, 255, 0, 0.2);
+  }
+}
+
+/* On pick-me hover - stop wiggle, enhance glow */
+#learningBtn.pick-me:hover {
+  animation: pick-me-glow 0.8s ease-in-out infinite;
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* Create Test - Purple/Violet (связан с Prompt Builder workflow) */
+#createTestBtn {
+  background: linear-gradient(180deg, #3d2a4d 0%, #2a1a33 100%);
+  border-color: #9966cc;
+  color: #bb88ee;
+  box-shadow: 0 4px 15px rgba(153, 102, 204, 0.25);
+}
+
+#createTestBtn:hover {
+  background: linear-gradient(180deg, #4d3a5d 0%, #3a2a44 100%);
+  box-shadow: 0 0 25px rgba(153, 102, 204, 0.5), 0 4px 20px rgba(153, 102, 204, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Write Mode - Matrix (green) */
+#writeModeBtn {
+  background: linear-gradient(180deg, #1a4d2a 0%, #0d3318 100%);
+  border-color: #00DD66;
+  color: #00FF88;
+  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.25);
+}
+
+#writeModeBtn:hover {
+  background: linear-gradient(180deg, #2a5d3a 0%, #1a4428 100%);
+  box-shadow: 0 0 25px rgba(0, 255, 136, 0.5), 0 4px 20px rgba(0, 255, 136, 0.3);
+  transform: translateY(-2px);
+}
+
+/* === WRITE ME! Animation for Write Mode - typewriter effect === */
+#writeModeBtn.write-me {
+  animation: write-me-glow 2s ease-in-out infinite;
+}
+
+/* Text container with typewriter effect */
+#writeModeBtn .typewriter-text {
+  display: inline-block;
+  white-space: nowrap;
+  position: relative;
+}
+
+/* Cursor - pseudo-element after text */
+#writeModeBtn .typewriter-text::after {
+  content: '';
+  position: absolute;
+  right: -4px;
+  top: 0;
+  height: 100%;
+  width: 2px;
+  background: transparent;
+}
+
+/* On .write-me activation - start typing animation */
+#writeModeBtn.write-me .typewriter-text {
+  clip-path: inset(0 100% 0 0);
+  animation: typewriter-reveal 1.5s steps(10) forwards;
+}
+
+#writeModeBtn.write-me .typewriter-text::after {
+  background: #00FF88;
+  animation:
+    cursor-blink 0.4s step-end 6,
+    cursor-hide 0.1s 2.5s forwards;
+}
+
+/* Text appearance animation */
+@keyframes typewriter-reveal {
+  0% { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0% 0 0); }
+}
+
+/* Cursor blink - green Matrix style */
+@keyframes cursor-blink {
+  0%, 100% { background: #00FF88; }
+  50% { background: transparent; }
+}
+
+/* Hide cursor at end */
+@keyframes cursor-hide {
+  to { background: transparent; }
+}
+
+/* Pulsating green glow */
+@keyframes write-me-glow {
+  0%, 100% {
+    box-shadow:
+      0 4px 15px rgba(0, 255, 136, 0.4),
+      0 0 20px rgba(0, 255, 136, 0.3),
+      inset 0 0 10px rgba(0, 255, 136, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 4px 25px rgba(0, 255, 136, 0.7),
+      0 0 40px rgba(0, 255, 136, 0.5),
+      0 0 60px rgba(0, 255, 136, 0.3),
+      inset 0 0 15px rgba(0, 255, 136, 0.2);
+  }
+}
+
+#writeModeBtn.write-me:hover {
+  animation: write-me-glow 0.8s ease-in-out infinite;
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* Disabled state - gray ghost */
+.action-buttons button:disabled {
+  background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%) !important;
+  border-color: #555 !important;
+  color: #666 !important;
+  box-shadow: none !important;
+  cursor: not-allowed;
+  transform: none !important;
+  opacity: 0.6;
+}
+
+.action-buttons button:disabled::before,
+.action-buttons button:disabled::after {
+  display: none;
+}
+
+/* Side panel buttons - standard Arcade style */
+#folderList button {
+  background: linear-gradient(180deg, #3a4a7a 0%, #2a3a5a 100%);
+  border: 2px solid #5a6a9a;
+  color: #FFE066;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+#folderList button:hover {
+  background: linear-gradient(180deg, #4a5a8a 0%, #3a4a6a 100%);
+  box-shadow: 0 0 15px rgba(255, 224, 102, 0.3);
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   ARCADE STYLE: Pac-Man style test table
+   ============================================ */
+
+#testsTable {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  background: rgba(20, 25, 45, 0.7);
+  border: 3px solid #4a5a8a;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.5),
+    0 0 25px rgba(74, 90, 138, 0.3),
+    inset 0 0 40px rgba(74, 90, 138, 0.1);
+}
+
+/* Table headers - soft blue background, yellow text */
+#testsTable th {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #3a4a7a 0%, #2a3a5a 100%) !important;
+  color: #FFE066;
+  border: 2px solid #5a6a9a;
+  padding: 16px 14px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  letter-spacing: 1px;
+}
+
+/* Data cells */
+#testsTable td {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 15px;
+  border: 2px solid #3a4a6a;
+  border-top: none;
+  padding: 14px 14px;
+  color: var(--ui-text-color);
+  transition: all 0.2s ease;
+}
+
+/* Hover - soft highlight */
+#testsTable tbody tr {
+  transition: all 0.2s ease;
+}
+
+#testsTable tbody tr:hover {
+  transform: scale(1.005);
+}
+
+#testsTable tbody tr:hover td {
+  background: rgba(255, 224, 102, 0.1);
+  box-shadow: inset 0 0 30px rgba(255, 224, 102, 0.05);
+  border-color: #6a7aaa;
+}
+
+/* Rating stars - golden with shimmer */
+#testsTable .stars-cell {
+  color: #FFD700 !important;
+  font-size: 20px;
+  text-shadow:
+    0 0 8px rgba(255, 215, 0, 0.8),
+    2px 2px 0 #000;
+  animation: arcade-stars-blink 2s ease-in-out infinite;
+  letter-spacing: 4px;
+}
+
+/* Checkboxes as Power Pellets */
+#testsTable input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle, #FFBDFF 0%, #FF88FF 100%);
+  border: 2px solid #FF66FF;
+  border-radius: 50%;
+  cursor: pointer;
+  animation: power-pellet-pulse 0.8s ease-in-out infinite;
+  box-shadow:
+    0 0 8px rgba(255, 189, 255, 0.6),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#testsTable input[type="checkbox"]:hover {
+  transform: scale(1.2);
+  box-shadow:
+    0 0 15px rgba(255, 255, 0, 0.8),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#testsTable input[type="checkbox"]:checked {
+  background: radial-gradient(circle, #FFFF00 0%, #FFD700 100%);
+  border-color: #FFFF00;
+  box-shadow:
+    0 0 15px rgba(255, 255, 0, 0.9),
+    0 0 30px rgba(255, 255, 0, 0.4),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+  animation: power-pellet-active 0.3s ease-in-out infinite;
+}
+
+/* === ARCADE ANIMATIONS === */
+
+@keyframes arcade-stars-blink {
+  0%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.8), 2px 2px 0 #000;
+  }
+  50% {
+    opacity: 0.7;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 1), 2px 2px 0 #000;
+  }
+}
+
+@keyframes power-pellet-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.85;
+  }
+}
+
+@keyframes power-pellet-active {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 15px rgba(255, 255, 0, 0.9), 0 0 30px rgba(255, 255, 0, 0.4);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(255, 255, 0, 1), 0 0 50px rgba(255, 255, 0, 0.6);
+  }
+}
+
+/* === EFFECT 1: Percentage color coding === */
+#testsTable .percent-high {
+  color: #44FF44 !important;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(68, 255, 68, 0.7);
+}
+
+#testsTable .percent-medium {
+  color: #FFD700 !important;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+}
+
+#testsTable .percent-low {
+  color: #FF5555 !important;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(255, 85, 85, 0.7);
+}
+
+/* === EFFECT 2: Row appearance === */
+#testsTable tbody tr.row-appear {
+  animation: row-slide-in 0.3s ease-out forwards;
+}
+
+@keyframes row-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* === EFFECT 3: Row deletion (chomp) === */
+#testsTable tbody tr.row-chomp {
+  animation: row-chomp 0.4s ease-in forwards;
+  pointer-events: none;
+}
+
+@keyframes row-chomp {
+  0% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scaleX(0.85);
+    background: rgba(255, 255, 0, 0.2);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleX(0) translateX(-50%);
+    height: 0;
+    padding: 0;
+  }
+}
+
+/* === EFFECT 4: Selected rows === */
+#testsTable tbody tr:has(input[type="checkbox"]:checked) {
+  background: rgba(255, 255, 0, 0.08);
+}
+
+#testsTable tbody tr:has(input[type="checkbox"]:checked) td {
+  border-color: #7a8aaa;
+  background: rgba(255, 215, 0, 0.05);
+}
+
+#testsTable tbody tr:has(input[type="checkbox"]:checked) td:first-child {
+  border-left: 3px solid #FFD700;
+}
+
+
+/* === EFFECT 6: Table border highlight (on hover) === */
+#testsTable {
+  /* Base box-shadow */
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(74, 90, 138, 0.3),
+    inset 0 0 40px rgba(74, 90, 138, 0.1);
+  transition: box-shadow 0.9s ease-out;
+}
+
+/* On hover - bright glow (stays while hover) */
+#testsTable:hover {
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.5),
+    0 0 35px rgba(100, 130, 200, 0.55),
+    0 0 70px rgba(74, 90, 138, 0.2),
+    inset 0 0 50px rgba(74, 90, 138, 0.12);
+}
+
+/* Create category button - Inky style with pulsation */
+#newCategoryBtn {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: bold;
+  background: linear-gradient(180deg, #1a4d4d 0%, #0d3333 100%) !important;
+  border: 2px solid #00DDDD !important;
+  border-radius: 6px;
+  color: #00FFFF !important;
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px 16px;
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.5);
+  transition: all 0.3s ease;
+  animation: newcat-glow 2s ease-in-out infinite;
+}
+
+@keyframes newcat-glow {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(0, 221, 221, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(0, 255, 255, 0.5);
+  }
+}
+
+#newCategoryBtn:hover {
+  background: linear-gradient(180deg, #2a5d5d 0%, #1a4444 100%) !important;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.6) !important;
+  animation: none; /* Stop pulsation on hover */
+}
+
+/* ============================================
+   ARCADE STYLE: Pac-Man style categories
+   ============================================ */
+
+/* Main category container */
+#categories {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Categories - Matrix style (green) */
+#categories .category-btn {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: bold;
+  background: linear-gradient(180deg, #1a3d2a 0%, #0d2a1a 100%);
+  border: 2px solid #2a5a3a;
+  border-radius: 6px;
+  color: #00FF88;
+  padding: 10px 30px 10px 12px;
+  text-shadow: 0 0 6px rgba(0, 255, 136, 0.5);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 100, 60, 0.3);
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+}
+
+/* Subcategories - darker */
+#categories .category-btn.subcategory {
+  background: linear-gradient(180deg, #0d2a1a 0%, #061a0d 100%);
+  border-color: #1a4a2a;
+  font-size: 12px;
+}
+
+/* Hover effect */
+#categories .category-btn:hover {
+  background: linear-gradient(180deg, #2a4d3a 0%, #1a3d2a 100%);
+  border-color: #3a6a4a;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+  transform: translateX(3px);
+}
+
+/* Active category */
+#categories .category-btn.active {
+  background: linear-gradient(180deg, #2a4d3a 0%, #1a3d2a 100%);
+  border-color: #00FF88;
+  box-shadow:
+    0 0 15px rgba(0, 255, 136, 0.5),
+    inset 0 0 20px rgba(0, 255, 136, 0.1);
+}
+
+/* Folder icon - shimmer */
+#categories .category-btn .folder-icon {
+  margin-right: 8px;
+  display: inline-block;
+  animation: matrix-glow 2s ease-in-out infinite;
+}
+
+@keyframes matrix-glow {
+  0%, 100% { text-shadow: 0 0 5px rgba(0, 255, 136, 0.6); }
+  50% { text-shadow: 0 0 12px rgba(0, 255, 136, 1); }
+}
+
+/* Menu icon (three dots) */
+#categories .category-btn .menu-icon {
+  color: #00FF88;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+#categories .category-btn:hover .menu-icon {
+  opacity: 1;
+}
+
+/* Shine effect on hover */
+#categories .category-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  pointer-events: none;
+}
+
+#categories .category-btn:hover::before {
+  animation: btn-shine 0.8s ease-out forwards;
+}
+
+/* Category appearance animation */
+#categories .category-btn {
+  animation: row-slide-in 0.3s ease-out forwards;
+}
+
+/* ============================================
+   EXPANDED CATEGORIES - visual highlighting
+   ============================================ */
+
+/* Expanded category with children - green left border + glow */
+#categories .category-btn[data-expanded="true"][data-hasChildren="true"] {
+  border-left: 4px solid #00FF88;
+  background: linear-gradient(180deg, #1a3d2a 0%, #0d2a1a 100%);
+  box-shadow:
+    0 0 12px rgba(0, 255, 136, 0.3),
+    inset 0 0 15px rgba(0, 255, 136, 0.05);
+}
+
+/* Folder icon in expanded category - enhanced glow */
+#categories .category-btn[data-expanded="true"] .folder-icon {
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);
+  animation: folder-open-matrix 1.5s ease-in-out infinite;
+}
+
+@keyframes folder-open-matrix {
+  0%, 100% {
+    text-shadow: 0 0 8px rgba(0, 255, 136, 0.6);
+  }
+  50% {
+    text-shadow: 0 0 15px rgba(0, 255, 136, 1);
+  }
+}
+
+/* Visible child nodes - indent + left line */
+#categories .category-btn.visible-node {
+  background: linear-gradient(180deg, #0d2a1a 0%, #061a0d 100%);
+  border-left: 3px solid #1a4a2a;
+  margin-left: 6px;
+  animation: child-slide-in 0.25s ease-out forwards;
+}
+
+/* Visible children on hover */
+#categories .category-btn.visible-node:hover {
+  border-left-color: #3a6a4a;
+  background: linear-gradient(180deg, #1a3d2a 0%, #0d2a1a 100%);
+}
+
+/* Active subcategory - full green border */
+#categories .category-btn.visible-node.active {
+  border: 2px solid #00FF88;
+  border-left: 3px solid #00CC66;
+  background: linear-gradient(180deg, #1a3d2a 0%, #0d2a1a 100%);
+  box-shadow:
+    0 0 12px rgba(0, 255, 136, 0.4),
+    inset 0 0 15px rgba(0, 255, 136, 0.1);
+}
+
+/* Child element appearance animation */
+@keyframes child-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Level-based color differentiation */
+#categories .category-btn[data-level="2"].visible-node {
+  margin-left: 12px;
+  border-left-color: #0d3a1a;
+  background: linear-gradient(180deg, #061a0d 0%, #030d06 100%);
+}
+
+#categories .category-btn[data-level="3"].visible-node {
+  margin-left: 18px;
+  border-left-color: #0a2a14;
+}
+
+/* Category context menu - Matrix style */
+.category-menu {
+  background: linear-gradient(180deg, #0d2a1a 0%, #061a0d 100%) !important;
+  border: 2px solid #2a5a3a !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+  overflow: hidden;
+}
+
+.category-menu .menu-item {
+  color: #00FF88 !important;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+  font-size: 13px;
+  padding: 10px 14px !important;
+  transition: all 0.2s ease;
+  background: transparent !important;
+}
+
+.category-menu .menu-item:hover {
+  background: rgba(0, 255, 136, 0.15) !important;
+  color: #00FF88 !important;
+  text-shadow: 0 0 8px rgba(0, 255, 136, 0.6);
+}
+
+.category-menu .menu-item-disabled {
+  opacity: 0.4 !important;
+  color: #666 !important;
+}
+
+.category-menu .menu-separator {
+  background-color: #4a5a8a !important;
+  margin: 4px 10px !important;
+}
+
+/* ============================================ */
+
+/* Main area styles */
+#mainContent {
+  flex-grow: 1;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* Adaptive display mode */
+#appWrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  z-index: 10;  /* Higher than canvas (z-index: 1) - UI above floating questions */
+}
+
+.app-view {
+  display: none;
+}
+
+/* Test table styles - base */
+#testsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+/* Table message styles - ARCADE STYLE */
+.table-message-cell {
+  text-align: center;
+  padding: 30px;
+  color: #FFE066;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  animation: arcade-stars-blink 2s ease-in-out infinite;
+}
+
+.table-loading-cell {
+  text-align: center;
+  padding: 30px;
+  color: #7AC5FF;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+}
+
+#testsTable th, #testsTable td {
+  text-align: left;
+}
+
+#testsTable th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Table column width */
+#testsTable .col-select { width: 60px; text-align: center; }
+#testsTable .col-name { width: auto; }  /* Stretches */
+#testsTable .col-stars { width: 100px; text-align: center; }
+#testsTable .col-accuracy { width: 80px; text-align: center; }   /* -40% */
+#testsTable .col-questions { width: 80px; text-align: center; }  /* -40% */
+#testsTable .col-attempts { width: 70px; text-align: center; }   /* -40% */
+
+/* Apply same widths to data cells */
+#testsTable td:nth-child(1) { width: 60px; text-align: center; }
+#testsTable td:nth-child(4) { width: 80px; text-align: center; }
+#testsTable td:nth-child(5) { width: 80px; text-align: center; }
+#testsTable td:nth-child(6) { width: 70px; text-align: center; }
+
+/* ============================================
+   TEST NAME CELL WITH MENU ICON
+   ============================================ */
+
+/* Name cell container */
+.test-name-cell {
+  position: relative;
+}
+
+/* Container for name and menu icon */
+.test-name-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* Test name text */
+.test-name-text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Menu icon - gear */
+.test-menu-icon {
+  opacity: 0;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+/* Show icon on row hover */
+#testsTable tbody tr:hover .test-menu-icon {
+  opacity: 0.7;
+}
+
+/* Icon hover state */
+.test-menu-icon:hover {
+  opacity: 1 !important;
+  background: rgba(255, 224, 102, 0.2);
+  transform: rotate(90deg);
+}
+
+/* Button styles */
+.action-buttons {
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 8px 12px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #45a049;
+}
+
+button:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+#createCategory {
+  background: #2196F3;
+}
+
+#createCategory:hover {
+  background: #0b7dda;
+}
+
+/* Context menu */
+.context-menu {
+  position: absolute;
+  right: 8px;
+  bottom: -60px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  z-index: 100;
+  padding: 5px 0;
+  font-size: 14px;
+  width: 120px;
+}
+
+.context-menu button {
+  background: none;
+  border: none;
+  padding: 8px 12px;
+  width: 100%;
+  text-align: right;
+  cursor: pointer;
+}
+
+.context-menu button:hover {
+  background-color: #f0f0f0;
+}
+
+/* Testing mode */
+body.test-mode #appWrapper {
+  display: block !important;
+}
+
+body.test-mode #testRunnerView {
+  padding-top: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+body:not(.test-mode) #appWrapper {
+  min-height: 100vh;
+}
+
+body.test-mode #appWrapper {
+  min-height: auto;
+} 

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FREEZLET</title>
+<!-- Новый модульный CSS -->
+  <link rel="stylesheet" href="UI/UI/CSS/categories.css">
+  <link rel="stylesheet" href="UI/UI/CSS/mainTable.css">
+  <link rel="stylesheet" href="UI/TestRunner/CSS/testRunner.css">
+  <link rel="stylesheet" href="UI/LearnMode/Components/Assets/CSS/questionArea.css">
+  <link rel="stylesheet" href="UI/LearnMode/Components/Assets/CSS/outerArea.css">
+  <!-- CSS модули эффектов пакмана -->
+  <link rel="stylesheet" href="UI/LearnMode/Components/Pacman/Effects/commonEffects.css">
+  <link rel="stylesheet" href="UI/LearnMode/Components/Pacman/Effects/MovementEffects/movementEffects.css">
+  <link rel="stylesheet" href="UI/LearnMode/Components/Pacman/Effects/EatingEffects/eatingEffects.css">
+  <link rel="stylesheet" href="UI/LearnMode/Components/Pacman/Effects/ExplosionEffects/explosionEffects.css">
+  <link rel="stylesheet" href="UI/LearnMode/Components/Assets/CSS/pacmanProgress.css">
+  <link rel="stylesheet" href="UI/LearnMode/Components/Assets/CSS/backgroundControls.css">
+  <!-- Write Mode CSS -->
+  <link rel="stylesheet" href="UI/LearnMode/Components/WriteQuestion/CSS/writeQuestion.css">
+  <link rel="stylesheet" href="UI/LearnMode/Components/WriteModeSelector/writeModeSelector.css">
+  <!-- Prompt Builder CSS -->
+  <link rel="stylesheet" href="UI/UI/CSS/promptBuilder.css">
+</head>
+<body>
+<div id="appWrapper">
+<!-- Боковая панель с категориями -->
+<div id="folderList">
+<button id="newCategoryBtn" data-i18n="buttons.newCategory">+ New Category</button>
+<div id="categories"></div>
+</div>
+<!-- Основное содержимое -->
+<div id="mainView" class="app-view">
+<h1 class="freezlet-logo">
+<span>F</span><span>R</span><span>E</span><span>E</span><span>Z</span><span>L</span><span>E</span><span>T</span>
+</h1>
+<div class="action-buttons">
+<button id="loadBtn" data-i18n="buttons.loadTest">Load New Test</button>
+<button id="createTestBtn" data-i18n="buttons.createTest">Create Test</button>
+<button disabled="" id="deleteTest" data-i18n="buttons.deleteTests">Delete Selected Tests</button>
+<button disabled="" id="mergeTests" data-i18n="buttons.mergeTests">Merge Tests</button>
+<button id="startTest" data-i18n="buttons.startTest">Start Test</button>
+<button id="learningBtn" data-i18n="buttons.learningMode">Learning Mode</button>
+<button id="writeModeBtn" data-i18n="buttons.writeMode"><span class="typewriter-text">Write Mode</span></button>
+<button id="promptBuilderBtn">
+  <svg class="ai-icon" viewBox="0 0 24 24" width="18" height="18">
+    <circle cx="12" cy="6" r="2.5" fill="currentColor"/>
+    <circle cx="6" cy="18" r="2.5" fill="currentColor"/>
+    <circle cx="18" cy="18" r="2.5" fill="currentColor"/>
+    <circle cx="12" cy="12" r="3.5" fill="currentColor"/>
+    <line x1="12" y1="8.5" x2="12" y2="9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <line x1="9" y1="13.5" x2="7" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <line x1="15" y1="13.5" x2="17" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <circle class="ai-core" cx="12" cy="12" r="1.5"/>
+  </svg>
+  <span data-i18n="buttons.promptBuilder">Prompt Builder</span>
+</button>
+</div>
+<table id="testsTable">
+<thead>
+<tr>
+<th class="col-select" data-i18n="table.select">Select</th>
+<th class="col-name" data-i18n="table.testName">Test Name</th>
+<th class="col-stars" data-i18n="table.stars">Stars</th>
+<th class="col-accuracy" data-i18n="table.accuracy">Accuracy</th>
+<th class="col-questions" data-i18n="table.questions">Questions</th>
+<th class="col-attempts" data-i18n="table.attempts">Attempts</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+</div>
+</div>
+
+<!-- Обработка сообщений и ошибок -->
+<script src="dist/renderer.bundle.js"></script>
+
+<!-- Start Test View -->
+<div id="testRunnerView" class="app-view" style="display: none;">
+  <div id="questionArea"></div>
+  <div id="finishArea" style="display: none">
+    <h3 data-i18n="test.completed">✅ Test Completed</h3>
+    <p id="finalScoreText"></p>
+    <button id="returnToMenuBtn" data-i18n="buttons.returnToMenu">Return to Menu</button>
+  </div>
+</div>
+
+<!-- Контейнер для модальных окон -->
+<div id="modalContainer"></div>
+<div id="modalContainerMainMenu"></div>
+<div id="modalContainerLearningMode" style="display: none;"></div>
+</body>
+</html>

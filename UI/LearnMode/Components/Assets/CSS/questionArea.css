@@ -1,0 +1,563 @@
+/* UI/LernMod/CSS/questionArea.css */
+/* Styles for question area in learn mode */
+
+/* Question area (hybridQuestionArea) */
+#hybridQuestionArea {
+    width: 80%;
+    min-width: 300px;
+    max-width: 800px;
+    min-height: 75vh;
+    max-height: 95vh;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    position: relative;
+    overflow-y: auto;
+}
+
+/* Loading indicator */
+#learnModeLoading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+/* Question styles */
+.learn-mode-question {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.learn-mode-question .question-text {
+    width: fit-content;
+    max-width: 100%;
+    font-size: 34px;
+    font-family: 'Segoe UI', sans-serif;
+    color: #ecf4ff;
+    font-weight: 600;
+    text-align: center;
+    margin: 10px auto 18px;
+    padding: 12px 20px;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    background-color: rgba(30, 31, 42, 0.5);
+    border: 2px solid #446;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 174, 255, 0.2);
+}
+
+/* Answer options - grid like in original */
+.answer-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    justify-items: center;
+}
+
+.answer-option {
+    width: 100%;
+    min-height: 51px;
+    font-size: 28px;
+    margin: 10px;
+    background-color: rgba(30, 31, 42, 0.5);
+    border: 2px solid #446;
+    border-radius: 10px;
+    color: #dcefff;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 174, 255, 0.2);
+    cursor: pointer;
+    font-family: 'Segoe UI', sans-serif;
+    text-shadow: 0 0 2px rgba(0,0,0,0.4);
+    text-align: center;
+    padding: 10px 15px;
+}
+
+.answer-option:hover {
+    background-color: #2a2b38;
+    border-color: #4cc4f3;
+    transform: scale(1.03);
+}
+
+.answer-option:disabled {
+    background: none;
+    color: inherit;
+    opacity: 1;
+    cursor: default;
+}
+
+.answer-option:disabled:hover {
+    cursor: not-allowed;
+    filter: brightness(0.8);
+}
+
+/* Styles for correct/incorrect answers */
+.correct-answer {
+    background-color: rgba(31, 77, 46, 0.8) !important;
+    color: #e4fbe4 !important;
+    font-weight: bold !important;
+    animation: flash 0.3s ease forwards !important;
+    border-color: #28a745 !important;
+}
+
+.incorrect-answer {
+    background-color: rgba(120, 40, 40, 0.8) !important;
+    color: #fbe4e4 !important;
+    font-weight: bold !important;
+    animation: flash 0.3s ease forwards !important;
+    border-color: #dc3545 !important;
+}
+
+@keyframes flash {
+    from {
+        box-shadow: 0 0 0px rgba(0, 174, 255, 0.0);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(0, 174, 255, 0.8);
+    }
+    to {
+        box-shadow: 0 0 10px rgba(0, 174, 255, 0.4);
+    }
+}
+
+/* Hide feedback */
+.feedback-message {
+    display: none !important;
+}
+
+/* Styles for results */
+.learn-mode-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 30px 20px;
+}
+
+.results-title {
+    font-size: 26px;
+    color: #ecf4ff;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+.results-score {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 10px 0 30px;
+    padding: 15px 30px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 200px;
+    background-color: rgba(30, 31, 42, 0.5);
+    border: 2px solid #446;
+    color: #dcefff;
+    box-shadow: 0 2px 6px rgba(0, 174, 255, 0.2);
+}
+
+.high-score {
+    border-color: #28a745;
+    color: #e4fbe4;
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.4);
+}
+
+.medium-score {
+    border-color: #ffc107;
+    color: #fff8e1;
+    box-shadow: 0 4px 8px rgba(255, 193, 7, 0.4);
+}
+
+.low-score {
+    border-color: #dc3545;
+    color: #fbe4e4;
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.4);
+}
+
+.results-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.learn-mode-results .close-button, 
+.learn-mode-results .retry-button {
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    min-width: 120px;
+    background: transparent;
+    border: 2px solid #e74c3c;
+    color: #e74c3c;
+    text-shadow: 0 0 6px rgba(231, 76, 60, 0.5);
+    box-shadow: 0 0 10px rgba(231, 76, 60, 0.4);
+}
+
+.learn-mode-results .close-button:hover {
+    background-color: rgba(231, 76, 60, 0.2);
+    box-shadow: 0 0 15px rgba(231, 76, 60, 0.6);
+    transform: scale(1.05);
+}
+
+.learn-mode-results .retry-button {
+    border-color: #3498db;
+    color: #3498db;
+    text-shadow: 0 0 6px rgba(52, 152, 219, 0.5);
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.4);
+}
+
+.learn-mode-results .retry-button:hover {
+    background-color: rgba(52, 152, 219, 0.2);
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.6);
+    transform: scale(1.05);
+}
+
+.details-title {
+    font-size: 20px;
+    color: #ecf4ff;
+    margin: 30px 0 15px;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+.results-details {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+    border: 1px solid #446;
+    border-radius: 8px;
+    background-color: rgba(30, 31, 42, 0.5);
+}
+
+.detail-item {
+    padding: 12px 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.correct-item {
+    background-color: rgba(31, 77, 46, 0.6);
+    color: #e4fbe4;
+}
+
+.incorrect-item {
+    background-color: rgba(120, 40, 40, 0.6);
+    color: #fbe4e4;
+}
+
+.question-number {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.question-status {
+    font-weight: bold;
+}
+
+/* ======= NEXTBLOCK SPLASH - EXACT COPY OF OLD LEARNMODE ======= */
+
+/* NextBlock splash container */
+#nextBlock {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Video container */
+.video-wrapper {
+    position: relative !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+/* NextBlock video */
+#nextBlockVideo.next-block-video {
+    display: block !important;
+    width: 17% !important;
+    height: auto !important;
+    transform: scale(1.3) !important;
+    opacity: 0.7 !important;
+}
+
+/* NextBlock button */
+#nextBlockBtn {
+    position: absolute !important;
+    bottom: 40px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 10000 !important;
+    padding: 12px 24px !important;
+    background: transparent !important;
+    border: 2px solid #4caf50 !important;
+    border-radius: 8px !important;
+    color: #4caf50 !important;
+    font-weight: bold !important;
+    font-size: 16px !important;
+    text-shadow: 0 0 6px #4caf50 !important;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.6) !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+/* Hover effect for NextBlock button */
+#nextBlockBtn:hover {
+    background: rgba(76, 175, 80, 0.1) !important;
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.8) !important;
+    transform: translateX(-50%) scale(1.05) !important;
+}
+
+/* ======= FINAL RESULTS SCREEN - EXACT COPY OF OLD LEARNMODE ======= */
+
+/* Final screen container */
+.final-results-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    padding: 10px 20px 20px 20px;
+    box-sizing: border-box;
+    gap: 10px;
+}
+
+/* Result video (exactly like in old learnmode) */
+.final-video {
+    width: 220px;
+    max-width: 100%;
+    height: 280px;
+    border-radius: 12px;
+    margin-top: 8px !important;
+    margin-bottom: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: block;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Stars (exactly like in old learnmode) */
+.modal-stars {
+    font-size: 24px;
+    color: gold;
+    text-align: center;
+    animation: starsPulse 2s infinite ease-in-out;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    height: 30px;
+    overflow: hidden;
+}
+
+/* Accuracy (exactly like in old learnmode) */
+.modal-accuracy {
+    text-align: center;
+    font-size: 24px;
+    color: gold;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+/* Final screen buttons container */
+.final-buttons-container {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    margin-top: 15px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Base final screen button styles (exactly like in old learnmode) */
+.final-button,
+#btn-try-again,
+#btn-next-stage,
+#btn-close-learning {
+    border: none;
+    border-radius: 1.5rem;
+    padding: 10px 25px;
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+    text-align: center;
+    margin: 4px;
+}
+
+/* Try Again - blue (exactly like in old learnmode) */
+#btn-try-again {
+    background: linear-gradient(135deg, #001a66, #000d33);
+    box-shadow: 0 0 12px #334d99, 0 0 24px #001a66;
+}
+
+#btn-try-again:hover {
+    background: linear-gradient(135deg, #002080, #000a1a);
+    box-shadow: 0 0 18px #3366cc, 0 0 36px #001a66;
+    transform: scale(1.05);
+}
+
+/* Next Stage - green (exactly like in old learnmode) */
+#btn-next-stage {
+    background: linear-gradient(135deg, #006600, #003300);
+    box-shadow: 0 0 12px #33cc33, 0 0 24px #009900;
+}
+
+#btn-next-stage:hover {
+    background: linear-gradient(135deg, #009900, #002200);
+    box-shadow: 0 0 18px #33cc33, 0 0 36px #009900;
+    transform: scale(1.05);
+}
+
+/* Close - purple (exactly like in old learnmode) */
+#btn-close-learning {
+    background: linear-gradient(135deg, #4b0082, #2a004d);
+    box-shadow: 0 0 12px #6a0dad, 0 0 24px #2a004d;
+}
+
+#btn-close-learning:hover {
+    background: linear-gradient(135deg, #5c00b3, #1f0033);
+    box-shadow: 0 0 18px #7d3ccf, 0 0 36px #2a004d;
+    transform: scale(1.05);
+}
+
+/* Star animation (exactly like in old learnmode) */
+@keyframes starsPulse {
+    0%, 100% {
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Final screen error container */
+.final-error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+}
+
+.final-error-container .error-title {
+    color: #ff4444;
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.final-error-container .error-message {
+    color: #ffffff;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* 🆕 NEW: Example styles (like answers) */
+.question-example {
+    width: 100%;
+    max-width: 500px;
+    min-height: 51px;
+    font-size: 28px;
+    margin: 10px auto;
+    background-color: rgba(30, 31, 42, 0.5);
+    border: 2px solid #446;
+    border-radius: 10px;
+    color: #dcefff;
+    font-family: 'Segoe UI', sans-serif;
+    text-shadow: 0 0 2px rgba(0,0,0,0.4);
+    text-align: center;
+    padding: 10px 15px;
+    box-shadow: 0 2px 6px rgba(0, 174, 255, 0.2);
+    font-style: italic;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ======= EXAMPLE DISPLAY SCREEN BETWEEN QUESTIONS ======= */
+
+/* Example display container */
+.learn-mode-example-display {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+/* "Example:" title */
+.example-title {
+    font-size: 2.5em;
+    color: #4caf50;
+    margin-bottom: 30px;
+    font-weight: bold;
+    text-shadow: 0 0 15px #4caf50;
+    animation: exampleGlow 2s ease-in-out infinite alternate;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Example text (increased by +8px: 28+8=36px) */
+.example-text {
+    font-size: 50px;
+    color: #ecf4ff;
+    font-style: italic;
+    line-height: 1.4;
+    max-width: 80%;
+    background-color: rgba(30, 31, 42, 0.7);
+    border: 2px solid #4caf50;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Title glow animation */
+@keyframes exampleGlow {
+    from {
+        text-shadow: 0 0 10px #4caf50;
+    }
+    to {
+        text-shadow: 0 0 20px #4caf50, 0 0 30px #4caf50;
+    }
+} 

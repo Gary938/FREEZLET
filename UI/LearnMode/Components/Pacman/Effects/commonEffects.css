@@ -1,0 +1,164 @@
+/* Effects/commonEffects.css - Common styles for all pacman effects */
+
+/* Main pacman progress container */
+.pacman-progress-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 220px;
+    height: 100%;
+    background: transparent;
+    border: none;
+    z-index: 5;
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+/* Progress track */
+.pacman-progress-track {
+    position: relative;
+    width: 80px;
+    height: 100%;
+    background: transparent;
+    margin-right: 5px;
+}
+
+/* Improved ghosts with details */
+.pacman-ghost {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    clip-path: polygon(50% 0%, 100% 35%, 100% 100%, 80% 85%, 60% 100%, 40% 85%, 20% 100%, 0% 85%, 0% 35%);
+    z-index: 1;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    
+    /* Ghost improvements */
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        inset 0 1px 2px rgba(255, 255, 255, 0.3);
+    filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.5));
+}
+
+/* Scared ghost */
+.pacman-ghost.scared {
+    filter: contrast(0.7) brightness(0.8);
+    animation: ghost-scared 0.2s infinite alternate;
+}
+
+/* Ghost eyes with improvements */
+.pacman-ghost-eye {
+    background: white;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.pacman-ghost-pupil {
+    background: black;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease;
+}
+
+/* Ghost wavy mouth */
+.pacman-ghost-mouth {
+    position: absolute;
+    transform: translateX(-50%);
+    background: #333;
+    border-radius: 0 0 50% 50%;
+    clip-path: polygon(
+        0% 0%, 
+        15% 70%, 
+        30% 100%, 
+        45% 70%, 
+        60% 100%, 
+        75% 70%, 
+        90% 100%, 
+        100% 0%
+    );
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+    animation: mouth-wave 2s infinite ease-in-out;
+}
+
+/* COMMON ANIMATIONS */
+
+/* Scared ghost animation */
+@keyframes ghost-scared {
+    0% { 
+        transform: translateX(-50%) translateY(0) scale(1); 
+    }
+    100% { 
+        transform: translateX(-50%) translateY(-1px) scale(0.98); 
+    }
+}
+
+/* Ghost swaying animation */
+@keyframes ghost-bob {
+    0% { 
+        transform: translateX(-50%) translateY(0); 
+    }
+    50% { 
+        transform: translateX(-50%) translateY(-2px); 
+    }
+    100% { 
+        transform: translateX(-50%) translateY(0); 
+    }
+}
+
+/* Wavy mouth animation */
+@keyframes mouth-wave {
+    0%, 100% {
+        clip-path: polygon(
+            0% 0%, 
+            15% 70%, 
+            30% 100%, 
+            45% 70%, 
+            60% 100%, 
+            75% 70%, 
+            90% 100%, 
+            100% 0%
+        );
+    }
+    50% {
+        clip-path: polygon(
+            0% 0%, 
+            15% 100%, 
+            30% 70%, 
+            45% 100%, 
+            60% 70%, 
+            75% 100%, 
+            90% 70%, 
+            100% 0%
+        );
+    }
+}
+
+/* Responsiveness for different screen sizes */
+@media (max-height: 600px) {
+    .pacman-progress-container {
+        width: 180px;
+        right: 0;
+    }
+    
+    .pacman-progress-track {
+        width: 60px;
+        margin-right: 3px;
+    }
+}
+
+@media (max-height: 400px) {
+    .pacman-progress-container {
+        width: 160px;
+        right: 10px;
+    }
+    
+    .pacman-progress-track {
+        width: 50px;
+    }
+} 

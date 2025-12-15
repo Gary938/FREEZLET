@@ -1,0 +1,405 @@
+/* UI/LearnMode-Hybrid/Components/Assets/CSS/backgroundControls.css */
+/* Background management styles for LearnMode-Hybrid (moved from UI/LernMod/CSS/) */
+
+/* Gear icon for mode selection */
+.background-mode-gear {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 9999;
+    user-select: none;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.background-mode-gear:hover {
+    transform: scale(1.1);
+}
+
+/* Dropdown menu for mode selection */
+.background-mode-menu {
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 10px;
+    border-radius: 8px;
+    display: none;
+    z-index: 9999;
+    min-width: 180px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Menu options */
+.background-mode-option {
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    color: white;
+    font-size: 14px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.background-mode-option:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Show menu without animation */
+.background-mode-menu.show {
+    display: block;
+}
+
+/* Styles for outerArea with background images - adapted for Hybrid */
+#outerArea.background-story,
+#outerArea.background-random,
+#outerArea.background-custom {
+    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: #000;
+}
+
+/* Media queries for responsiveness */
+@media screen and (max-width: 1366px) and (max-height: 768px) {
+    #outerArea.background-story,
+    #outerArea.background-random,
+    #outerArea.background-custom {
+        background-size: 100% 100% !important;
+    }
+}
+
+@media screen and (min-width: 1367px), screen and (min-height: 769px) {
+    #outerArea.background-story,
+    #outerArea.background-random,
+    #outerArea.background-custom {
+        background-size: cover !important;
+    }
+}
+
+/* ===== MyBackground Gallery Styles ===== */
+
+/* Gallery overlay */
+.mybackground-gallery-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.mybackground-gallery-overlay.active {
+    opacity: 1;
+}
+
+/* Gallery container */
+.mybackground-gallery-container {
+    background: linear-gradient(180deg, #1a2035 0%, #0d1520 100%);
+    border: 2px solid #4a5a8a;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Gallery header */
+.mybackground-gallery-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #3a4a6a;
+}
+
+.mybackground-gallery-title {
+    color: #FFE066;
+    margin: 0;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 20px;
+}
+
+.mybackground-gallery-close {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: color 0.2s;
+}
+
+.mybackground-gallery-close:hover {
+    color: #fff;
+}
+
+/* Gallery grid */
+.mybackground-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+    overflow-y: auto;
+    max-height: 50vh;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+/* Gallery item */
+.mybackground-gallery-item {
+    aspect-ratio: 16/9;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.mybackground-gallery-item:hover {
+    border-color: #6a7aaa;
+    transform: scale(1.03);
+}
+
+.mybackground-gallery-item.selected {
+    border-color: #FFE066;
+    box-shadow: 0 0 15px rgba(255, 224, 102, 0.4);
+}
+
+/* Empty state */
+.mybackground-gallery-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #888;
+    padding: 40px 20px;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+}
+
+/* Gallery footer */
+.mybackground-gallery-footer {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    border-top: 1px solid #3a4a6a;
+}
+
+/* Select button */
+.mybackground-gallery-select {
+    padding: 12px 32px;
+    background: linear-gradient(180deg, #3d2a4d 0%, #2a1a33 100%);
+    border: 2px solid #9966cc;
+    border-radius: 6px;
+    color: #bb88ee;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mybackground-gallery-select:hover:not(:disabled) {
+    box-shadow: 0 0 15px rgba(153, 102, 204, 0.4);
+    background: linear-gradient(180deg, #4d3a5d 0%, #3a2a43 100%);
+}
+
+.mybackground-gallery-select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ===== Mode Toggle (Static/Random) ===== */
+.mybackground-mode-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #888;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.toggle-checkbox {
+    display: none;
+}
+
+.toggle-slider {
+    width: 40px;
+    height: 20px;
+    background: #333;
+    border-radius: 10px;
+    position: relative;
+    transition: background 0.3s;
+}
+
+.toggle-slider::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: #666;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.toggle-checkbox:checked + .toggle-slider {
+    background: #4a5a8a;
+}
+
+.toggle-checkbox:checked + .toggle-slider::after {
+    transform: translateX(20px);
+    background: #FFE066;
+}
+
+/* Mobile adaptation for gallery */
+@media (max-width: 768px) {
+    .mybackground-gallery-container {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .mybackground-gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 8px;
+    }
+
+    .mybackground-gallery-title {
+        font-size: 16px;
+    }
+}
+
+/* Mobile adaptation */
+@media (max-width: 768px) {
+    .background-mode-gear {
+        font-size: 20px;
+        top: 5px;
+        right: 5px;
+    }
+
+    .background-mode-menu {
+        top: 35px;
+        right: 5px;
+        min-width: 160px;
+    }
+}
+
+/* ============================================
+   DELETE BUTTON STYLES
+   ============================================ */
+
+.mybackground-gallery-delete {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%);
+    color: white;
+    margin-right: 15px;
+}
+
+.mybackground-gallery-delete:hover:not(:disabled) {
+    background: linear-gradient(135deg, #A52A2A 0%, #FF4444 100%);
+    transform: scale(1.02);
+}
+
+.mybackground-gallery-delete:disabled {
+    background: #333;
+    color: #666;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* ============================================
+   CONFIRM DIALOG STYLES
+   ============================================ */
+
+.mybackground-confirm-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.mybackground-confirm-overlay.active {
+    opacity: 1;
+}
+
+.mybackground-confirm-dialog {
+    background: linear-gradient(180deg, #2a3550 0%, #1a2035 100%);
+    border: 2px solid #3a4a70;
+    border-radius: 12px;
+    padding: 25px 35px;
+    text-align: center;
+    min-width: 280px;
+}
+
+.mybackground-confirm-text {
+    color: #ffffff;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.mybackground-confirm-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.mybackground-confirm-yes,
+.mybackground-confirm-no {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mybackground-confirm-no {
+    background: #444;
+    color: #fff;
+}
+
+.mybackground-confirm-no:hover {
+    background: #555;
+}
+
+.mybackground-confirm-yes {
+    background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%);
+    color: white;
+}
+
+.mybackground-confirm-yes:hover {
+    background: linear-gradient(135deg, #A52A2A 0%, #FF4444 100%);
+} 

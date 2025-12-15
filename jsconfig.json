@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@UI/*": ["UI/*"],
+      "@Main/*": ["Main/*"],
+      "@Preload/*": ["Preload/*"],
+      "@FileManager/*": ["FileManager/*"],
+      "@CSS/*": ["CSS/*"],
+      "@Buttons/*": ["Buttons/*"],
+      "@Renderer/*": ["Renderer/*"],
+      "@Progress/*": ["Progress/*"]
+    }
+  }
+} 

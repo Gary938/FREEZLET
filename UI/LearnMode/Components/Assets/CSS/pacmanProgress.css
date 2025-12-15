@@ -1,0 +1,19 @@
+/* UI/LearnMode-Hybrid/Components/Assets/CSS/pacmanProgress.css */
+/* Modular styles for pacman progress bar */
+
+/* 
+ * MODULE STRUCTURE (loaded in index.html):
+ * 
+ * commonEffects.css - common container, track and ghost styles
+ * MovementEffects/movementEffects.css - pacman movement, eyes, horns styles
+ * EatingEffects/eatingEffects.css - eating, crumbs, flashes, popup numbers styles
+ * ExplosionEffects/explosionEffects.css - explosion, particles, sparks, smoke styles
+ * 
+ * MODULAR STRUCTURE BENEFITS:
+ * ✓ Clear separation of concerns between effect groups
+ * ✓ Simplified support and debugging of individual effect types
+ * ✓ Ability to load only required effect groups
+ * ✓ Compliance with AI-architecture rules for quick understanding
+ * ✓ No code duplication between modules
+ * ✓ Direct HTML loading without relative path issues
+ */ 

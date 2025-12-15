@@ -1,0 +1,177 @@
+/* MovementEffects/movementEffects.css - CSS for pacman movement effects */
+
+/* Main pacman element */
+.pacman {
+    position: absolute;
+    background: #000000;
+    border-radius: 50%;
+    left: 50%;
+    bottom: 10px;
+    transform: translateX(-50%) rotate(-90deg);
+    z-index: 10;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 40%, 60% 50%, 100% 60%, 100% 100%, 0% 100%, 0% 0%);
+    animation: pacman-munch 0.5s infinite alternate;
+    transition: bottom 0.5s ease-in-out;
+    
+    /* Inner shadows only - don't extend beyond borders */
+    box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+/* Pacman horns - with gap fixes */
+.pacman-horn-left,
+.pacman-horn-right {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: var(--horn-size, 6px) solid transparent;
+    border-right: var(--horn-size, 6px) solid transparent;
+    border-bottom: var(--horn-height, 16px) solid #000;
+    top: var(--horn-top, -1px);
+    z-index: 2;
+    /* Removed outer shadow to not extend beyond borders */
+}
+
+.pacman-horn-left {
+    left: var(--horn-offset, 4px);
+    transform: rotate(-45deg);
+}
+
+.pacman-horn-right {
+    right: var(--horn-offset, 4px);
+    transform: rotate(45deg);
+}
+
+/* Eye container */
+.pacman-eye-container {
+    position: absolute;
+    top: 30%;
+    right: 26%;
+    z-index: 2;
+    transition: transform 0.3s ease;
+}
+
+/* Pacman eyelid */
+.pacman-eyelid {
+    position: absolute;
+    background: #000000;
+    border-radius: 50% 50% 0 0;
+    width: 100%;
+    height: 50%;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    transform-origin: bottom center;
+    animation: pacman-blink 3s infinite;
+}
+
+/* Pacman eye */
+.pacman-eye {
+    position: relative;
+    background: #FFFF00;
+    border-radius: 50%;
+    z-index: 2;
+    /* Inner shadows only for volume */
+    box-shadow: 
+        inset 1px 1px 2px rgba(255, 255, 255, 0.8),
+        inset -1px -1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Pacman pupil */
+.pacman-pupil {
+    position: absolute;
+    background: #000;
+    border-radius: 50%;
+    top: 10%;
+    left: 40%;
+    transition: transform 0.2s ease;
+    animation: pupil-random-look 30s infinite;
+}
+
+/* Eye highlight - improved */
+.pacman-eye-shine {
+    position: absolute;
+    background: #FFFFFF;
+    border-radius: 50%;
+    width: 28%;  /* Reduced by 30% from 40% */
+    height: 28%; /* Reduced by 30% from 40% */
+    top: 15%;
+    left: 55%;
+    z-index: 4;
+    box-shadow: 
+        0 0 3px rgba(255, 255, 255, 0.8),
+        inset 0 0 2px rgba(255, 255, 255, 1);
+    animation: eye-shine-pulse 2s infinite ease-in-out;
+}
+
+/* MOVEMENT ANIMATIONS */
+
+/* Main chewing animation */
+@keyframes pacman-munch {
+    0% {
+        clip-path: polygon(0% 0%, 100% 0%, 100% 40%, 60% 50%, 100% 60%, 100% 100%, 0% 100%, 0% 0%);
+    }
+    100% {
+        clip-path: polygon(0% 0%, 100% 0%, 100% 45%, 80% 50%, 100% 55%, 100% 100%, 0% 100%, 0% 0%);
+    }
+}
+
+/* Blinking animation */
+@keyframes pacman-blink {
+    0%, 90%, 100% { 
+        transform: scaleY(0.05); 
+        opacity: 1; 
+    }
+    91%, 99% { 
+        transform: scaleY(1); 
+        opacity: 1; 
+    }
+}
+
+/* Eye highlight animation - improved */
+@keyframes eye-shine-pulse {
+    0%, 100% { 
+        opacity: 1; 
+        transform: scale(1);
+        box-shadow: 
+            0 0 3px rgba(255, 255, 255, 0.8),
+            inset 0 0 2px rgba(255, 255, 255, 1);
+    }
+    50% { 
+        opacity: 0.7; 
+        transform: scale(1.3);
+        box-shadow: 
+            0 0 6px rgba(255, 255, 255, 1),
+            inset 0 0 4px rgba(255, 255, 255, 1);
+    }
+}
+
+/* Random pupil movement animation */
+@keyframes pupil-random-look {
+    0%, 95%, 100% { 
+        transform: translate(0, 0); 
+    }
+    2% { 
+        transform: translate(3px, -2px); 
+    }
+    4% { 
+        transform: translate(0, 0); 
+    }
+    25% { 
+        transform: translate(-2px, 1px); 
+    }
+    27% { 
+        transform: translate(0, 0); 
+    }
+    50% { 
+        transform: translate(1px, 3px); 
+    }
+    52% { 
+        transform: translate(0, 0); 
+    }
+    75% { 
+        transform: translate(2px, -1px); 
+    }
+    77% { 
+        transform: translate(0, 0); 
+    }
+} 

@@ -1,0 +1,225 @@
+/* ExplosionEffects/explosionEffects.css - CSS for pacman explosion effects */
+
+/* Exploding pacman - red glow */
+.pacman.exploding {
+    animation: pacman-explode-red 1.2s ease-out forwards;
+}
+
+/* Pacman explosion particles */
+.pacman-explosion-particle {
+    position: absolute;
+    background: #000000;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 11;
+    animation: explosion-particle-scatter 2s ease-out forwards;
+}
+
+/* Red explosion particles */
+.pacman-explosion-particle.red {
+    background: #FF0000;
+    box-shadow: 0 0 6px #FF0000, 0 0 12px #FF4444;
+}
+
+/* Orange explosion particles */
+.pacman-explosion-particle.orange {
+    background: #FF4500;
+    box-shadow: 0 0 6px #FF4500, 0 0 12px #FF8C00;
+}
+
+/* Yellow explosion particles */
+.pacman-explosion-particle.yellow {
+    background: #FFD700;
+    box-shadow: 0 0 4px #FFD700;
+}
+
+/* White explosion particles */
+.pacman-explosion-particle.white {
+    background: #FFFFFF;
+    box-shadow: 0 0 4px #FFFFFF;
+}
+
+/* Explosion sparks */
+.pacman-explosion-spark {
+    position: absolute;
+    background: #FF6600;
+    pointer-events: none;
+    z-index: 12;
+    animation: spark-fade 1.5s ease-out forwards;
+}
+
+/* Explosion rings */
+.pacman-explosion-ring {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    border: 2px solid #FF0000;
+    pointer-events: none;
+    z-index: 10;
+    animation: ring-expand 1.2s ease-out forwards;
+}
+
+/* Explosion smoke */
+.pacman-explosion-smoke {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(128, 128, 128, 0.6) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9;
+    animation: smoke-rise 3s ease-out forwards;
+}
+
+/* Big explosion effect - red */
+.pacman-big-explosion {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, 
+        rgba(255, 255, 255, 1) 0%, 
+        rgba(255, 100, 100, 0.9) 15%,
+        rgba(255, 0, 0, 0.8) 30%, 
+        rgba(255, 69, 0, 0.7) 50%,
+        rgba(255, 140, 0, 0.5) 70%,
+        transparent 100%);
+    box-shadow: 
+        0 0 30px 8px rgba(255, 0, 0, 0.7),
+        0 0 60px 15px rgba(255, 69, 0, 0.5),
+        0 0 90px 20px rgba(255, 140, 0, 0.3),
+        inset 0 0 20px rgba(255, 255, 255, 0.3);
+    animation: big-explosion-fade 1.8s ease-out forwards;
+    pointer-events: none;
+    z-index: 13;
+}
+
+/* EXPLOSION ANIMATIONS */
+
+/* Pacman explosion animation - red version */
+@keyframes pacman-explode-red {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) rotate(-90deg) scale(1);
+        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.8));
+    }
+    20% {
+        opacity: 1;
+        transform: translateX(-50%) rotate(-90deg) scale(1.1);
+        filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.6));
+    }
+    40% {
+        opacity: 1;
+        transform: translateX(-50%) rotate(-90deg) scale(1.3);
+        filter: drop-shadow(0 0 15px rgba(255, 69, 0, 0.8));
+    }
+    70% {
+        opacity: 0.8;
+        transform: translateX(-50%) rotate(-90deg) scale(1.6);
+        filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.9));
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) rotate(-90deg) scale(0);
+        filter: drop-shadow(0 0 0px transparent);
+    }
+}
+
+/* Explosion particles animation - improved */
+@keyframes explosion-particle-scatter {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(calc(var(--particle-x, 0) * 0.7), calc(var(--particle-y, 0) * 0.7)) scale(1.2) rotate(180deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--particle-x, 0), var(--particle-y, 0)) scale(0) rotate(360deg);
+    }
+}
+
+/* Sparks animation */
+@keyframes spark-fade {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1) rotate(0deg);
+        background: #FFFFFF;
+    }
+    30% {
+        opacity: 1;
+        background: #FF6600;
+        transform: translate(calc(var(--spark-x, 0) * 0.5), calc(var(--spark-y, 0) * 0.5)) scale(0.8) rotate(90deg);
+    }
+    100% {
+        opacity: 0;
+        background: #FF0000;
+        transform: translate(var(--spark-x, 0), var(--spark-y, 0)) scale(0) rotate(180deg);
+    }
+}
+
+/* Explosion rings animation */
+@keyframes ring-expand {
+    0% {
+        opacity: 0.8;
+        transform: translateX(-50%) scale(0);
+        border-color: #FF0000;
+        border-width: 3px;
+    }
+    50% {
+        opacity: 0.6;
+        border-color: #FF4500;
+        border-width: 2px;
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) scale(3);
+        border-color: #FFD700;
+        border-width: 1px;
+    }
+}
+
+/* Smoke animation */
+@keyframes smoke-rise {
+    0% {
+        opacity: 0.6;
+        transform: translateX(-50%) scale(0);
+    }
+    30% {
+        opacity: 0.4;
+        transform: translateX(-50%) scale(1) translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) scale(2) translateY(-30px);
+    }
+}
+
+/* Big explosion animation - improved red version */
+@keyframes big-explosion-fade {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0) rotate(0deg);
+    }
+    15% {
+        opacity: 1;
+        transform: translateX(-50%) scale(0.3) rotate(45deg);
+    }
+    30% {
+        opacity: 1;
+        transform: translateX(-50%) scale(0.7) rotate(90deg);
+    }
+    60% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.2) rotate(180deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) scale(2.5) rotate(360deg);
+    }
+} 

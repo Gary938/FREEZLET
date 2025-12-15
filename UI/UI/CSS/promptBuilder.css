@@ -1,0 +1,582 @@
+/* ========================================
+   Prompt Builder - CSS Styles
+   AI-themed design (purple/violet color scheme)
+   ======================================== */
+
+/* === Button Style === */
+#promptBuilderBtn {
+  background: linear-gradient(180deg, #4a2a6a 0%, #2d1a40 100%);
+  border-color: #9966cc;
+  color: #cc99ff;
+  box-shadow: 0 4px 15px rgba(153, 102, 204, 0.25);
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* AI Icon Style */
+#promptBuilderBtn .ai-icon {
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 3px rgba(204, 153, 255, 0.5));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+#promptBuilderBtn:hover .ai-icon {
+  filter: drop-shadow(0 0 8px rgba(204, 153, 255, 0.8));
+  transform: scale(1.1);
+}
+
+/* AI Core - center circle */
+#promptBuilderBtn .ai-core {
+  fill: #1a1a2e;
+  transition: fill 0.3s ease, filter 0.3s ease;
+}
+
+#promptBuilderBtn:hover .ai-core {
+  fill: #ff3333;
+  filter: drop-shadow(0 0 6px #ff3333) drop-shadow(0 0 12px #ff0000);
+}
+
+#promptBuilderBtn:hover:not(:disabled) {
+  background: linear-gradient(180deg, #5a3a7a 0%, #3d2a50 100%);
+  box-shadow: 0 0 25px rgba(153, 102, 204, 0.5), 0 4px 20px rgba(153, 102, 204, 0.3);
+  transform: translateY(-2px);
+}
+
+#promptBuilderBtn:disabled {
+  background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+  border-color: #555;
+  color: #666;
+  box-shadow: none;
+}
+
+/* AI sparkle animation for button */
+#promptBuilderBtn::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(153, 102, 204, 0.1),
+    transparent
+  );
+  transform: rotate(45deg);
+  animation: ai-shimmer 3s infinite;
+}
+
+@keyframes ai-shimmer {
+  0% { transform: translateX(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) rotate(45deg); }
+}
+
+/* === Modal Overlay === */
+.prompt-builder-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.prompt-builder-overlay.active {
+  opacity: 1;
+}
+
+/* === Modal Container === */
+.prompt-builder-modal {
+  background: linear-gradient(180deg, #1a1a2e 0%, #16162a 100%);
+  border: 2px solid #9966cc;
+  border-radius: 16px;
+  box-shadow:
+    0 0 40px rgba(153, 102, 204, 0.3),
+    0 8px 32px rgba(0, 0, 0, 0.5);
+  width: 600px;
+  max-width: 95vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: translateY(20px) scale(0.95);
+  transition: transform 0.3s ease;
+}
+
+.prompt-builder-overlay.active .prompt-builder-modal {
+  transform: translateY(0) scale(1);
+}
+
+/* === Modal Header === */
+.prompt-builder-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(153, 102, 204, 0.3);
+  background: linear-gradient(90deg, rgba(153, 102, 204, 0.1) 0%, transparent 100%);
+}
+
+.prompt-builder-title {
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 20px;
+  font-weight: bold;
+  color: #cc99ff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.prompt-builder-title::before {
+  content: '✨';
+}
+
+.prompt-builder-close {
+  background: transparent;
+  border: none;
+  color: #888;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.prompt-builder-close:hover {
+  color: #ff6666;
+}
+
+/* === Modal Body === */
+.prompt-builder-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* === Form Groups === */
+.pb-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pb-form-group label {
+  font-family: 'Consolas', monospace;
+  font-size: 14px;
+  color: #9966cc;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* === Input Fields === */
+.pb-input,
+.pb-textarea {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(153, 102, 204, 0.4);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-family: 'Consolas', monospace;
+  font-size: 14px;
+  color: #e0e0e0;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pb-input:focus,
+.pb-textarea:focus {
+  outline: none;
+  border-color: #9966cc;
+  box-shadow: 0 0 10px rgba(153, 102, 204, 0.3);
+}
+
+.pb-input::placeholder,
+.pb-textarea::placeholder {
+  color: #666;
+}
+
+.pb-textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* === Range Slider === */
+.pb-range-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pb-range {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  outline: none;
+}
+
+.pb-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(180deg, #9966cc 0%, #6633aa 100%);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(153, 102, 204, 0.5);
+  transition: transform 0.2s ease;
+}
+
+.pb-range::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.pb-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(180deg, #9966cc 0%, #6633aa 100%);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 10px rgba(153, 102, 204, 0.5);
+}
+
+.pb-range-value {
+  font-family: 'Consolas', monospace;
+  font-size: 18px;
+  font-weight: bold;
+  color: #cc99ff;
+  min-width: 40px;
+  text-align: center;
+}
+
+.pb-recommendation {
+  font-size: 12px;
+  color: #888;
+  font-style: italic;
+}
+
+/* === Checkbox === */
+.pb-checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.pb-checkbox {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(153, 102, 204, 0.4);
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.pb-checkbox:checked {
+  background: linear-gradient(180deg, #9966cc 0%, #6633aa 100%);
+  border-color: #9966cc;
+}
+
+.pb-checkbox:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.pb-checkbox-label {
+  font-family: 'Consolas', monospace;
+  font-size: 14px;
+  color: #e0e0e0;
+}
+
+/* === Select Dropdown === */
+.pb-select {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(153, 102, 204, 0.4);
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-family: 'Consolas', monospace;
+  font-size: 14px;
+  color: #e0e0e0;
+  cursor: pointer;
+  width: 100px;
+}
+
+.pb-select:focus {
+  outline: none;
+  border-color: #9966cc;
+}
+
+.pb-select option {
+  background: #1a1a2e;
+  color: #e0e0e0;
+}
+
+/* === Radio Buttons === */
+.pb-radio-group {
+  display: flex;
+  gap: 24px;
+}
+
+.pb-radio-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.pb-radio {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(153, 102, 204, 0.4);
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.pb-radio:checked {
+  border-color: #9966cc;
+}
+
+.pb-radio:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(180deg, #9966cc 0%, #6633aa 100%);
+  border-radius: 50%;
+}
+
+.pb-radio-label {
+  font-family: 'Consolas', monospace;
+  font-size: 14px;
+  color: #e0e0e0;
+}
+
+/* === Radio Group Vertical (for output type) === */
+.pb-radio-group-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pb-radio-option {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pb-radio-option .pb-radio-container {
+  margin-bottom: 0;
+}
+
+.pb-radio-hint {
+  font-family: 'Consolas', monospace;
+  font-size: 11px;
+  color: #888;
+  font-style: italic;
+  margin-left: 28px;
+}
+
+/* === Examples Sub-group === */
+.pb-examples-subgroup {
+  margin-left: 36px;
+  padding: 12px;
+  background: rgba(153, 102, 204, 0.05);
+  border-radius: 8px;
+  border-left: 2px solid rgba(153, 102, 204, 0.3);
+  transition: opacity 0.3s ease;
+}
+
+.pb-examples-subgroup.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* === Preview Section === */
+.pb-preview-section {
+  border-top: 1px solid rgba(153, 102, 204, 0.2);
+  padding-top: 20px;
+}
+
+.pb-preview-label {
+  font-family: 'Consolas', monospace;
+  font-size: 14px;
+  color: #9966cc;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pb-preview-label::before {
+  content: '👁';
+}
+
+.pb-preview {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(153, 102, 204, 0.3);
+  border-radius: 8px;
+  padding: 16px;
+  font-family: 'Consolas', monospace;
+  font-size: 12px;
+  color: #aaa;
+  min-height: 150px;
+  max-height: 250px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  resize: none;
+}
+
+.pb-preview::-webkit-scrollbar {
+  width: 8px;
+}
+
+.pb-preview::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.pb-preview::-webkit-scrollbar-thumb {
+  background: rgba(153, 102, 204, 0.4);
+  border-radius: 4px;
+}
+
+.pb-preview::-webkit-scrollbar-thumb:hover {
+  background: rgba(153, 102, 204, 0.6);
+}
+
+/* === Modal Footer === */
+.prompt-builder-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 20px 24px;
+  border-top: 1px solid rgba(153, 102, 204, 0.2);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* === Buttons === */
+.pb-btn {
+  font-family: 'Consolas', monospace;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 12px 24px;
+  border: 2px solid;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pb-btn-primary {
+  background: linear-gradient(180deg, #9966cc 0%, #6633aa 100%);
+  border-color: #9966cc;
+  color: white;
+}
+
+.pb-btn-primary:hover {
+  background: linear-gradient(180deg, #aa77dd 0%, #7744bb 100%);
+  box-shadow: 0 0 20px rgba(153, 102, 204, 0.5);
+  transform: translateY(-2px);
+}
+
+.pb-btn-secondary {
+  background: transparent;
+  border-color: #666;
+  color: #888;
+}
+
+.pb-btn-secondary:hover {
+  border-color: #888;
+  color: #aaa;
+}
+
+.pb-btn-copy {
+  background: linear-gradient(180deg, #2a6a4a 0%, #1a4030 100%);
+  border-color: #66cc99;
+  color: #99ffcc;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pb-btn-copy:hover {
+  background: linear-gradient(180deg, #3a7a5a 0%, #2a5040 100%);
+  box-shadow: 0 0 20px rgba(102, 204, 153, 0.4);
+  transform: translateY(-2px);
+}
+
+.pb-btn-copy.copied {
+  background: linear-gradient(180deg, #66cc99 0%, #44aa77 100%);
+  animation: copy-success 0.5s ease;
+}
+
+@keyframes copy-success {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* === Inline form row === */
+.pb-inline-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pb-inline-row .pb-form-group {
+  flex-direction: row;
+  align-items: center;
+}
+
+/* === Responsive === */
+@media (max-width: 640px) {
+  .prompt-builder-modal {
+    width: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .prompt-builder-footer {
+    flex-wrap: wrap;
+  }
+
+  .pb-btn {
+    flex: 1;
+    min-width: 120px;
+  }
+}

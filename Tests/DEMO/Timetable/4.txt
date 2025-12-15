@@ -1,0 +1,79 @@
+4×1=
+three
+*four
+five
+six
+Example: four
+Example: four
+
+4×2=
+seven
+*eight
+nine
+ten
+Example: eight
+Example: eight
+
+4×3=
+eleven
+*twelve
+thirteen
+fourteen
+Example: twelve
+Example: twelve
+
+4×4=
+fifteen
+*sixteen
+seventeen
+eighteen
+Example: sixteen
+Example: sixteen
+
+4×5=
+nineteen
+*twenty
+twenty-one
+twenty-two
+Example: twenty
+Example: twenty
+
+4×6=
+twenty-three
+*twenty-four
+twenty-five
+twenty-six
+Example: twenty-four
+Example: twenty-four
+
+4×7=
+twenty-seven
+*twenty-eight
+twenty-nine
+thirty
+Example: twenty-eight
+Example: twenty-eight
+
+4×8=
+thirty-one
+*thirty-two
+thirty-three
+thirty-four
+Example: thirty-two
+Example: thirty-two
+
+4×9=
+thirty-five
+*thirty-six
+thirty-seven
+thirty-eight
+Example: thirty-six
+Example: thirty-six
+
+4×10=
+thirty-nine
+*forty
+forty-one
+forty-two
+Example: forty
+Example: forty

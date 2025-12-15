@@ -1,0 +1,44 @@
+/* UI/LearnMode-Hybrid/Components/Assets/CSS/outerArea.css */
+/* Styles for learn mode outer area - copied from UI/LernMod/CSS/ */
+
+/* Outer area (outerArea) - now main full-screen container */
+#outerArea {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a1a1a;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    overflow: auto;
+    font-family: Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+/* Close button */
+#closeLearnMode {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #aaaaaa;
+    transition: color 0.3s;
+    z-index: 10000;
+    padding: 0;
+    margin: 0;
+}
+
+#closeLearnMode:hover {
+    color: #ff5c5c;
+} 

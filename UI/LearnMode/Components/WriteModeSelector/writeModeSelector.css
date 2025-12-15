@@ -1,0 +1,106 @@
+/* WriteModeSelector - Mode selection modal window */
+
+.write-mode-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.write-mode-modal {
+    background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+    border: 2px solid #00FFFF;
+    border-radius: 12px;
+    padding: 30px 40px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+    animation: slideIn 0.3s ease-out;
+}
+
+.write-mode-title {
+    color: #00FFFF;
+    text-align: center;
+    margin: 0 0 25px 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.write-mode-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.write-mode-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 30px;
+    border: 2px solid;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 180px;
+    background: transparent;
+}
+
+.write-mode-btn .btn-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.write-mode-btn .btn-subtitle {
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+/* Strict mode - orange */
+.write-mode-btn-strict {
+    border-color: #FFA500;
+    color: #FFA500;
+}
+
+.write-mode-btn-strict:hover {
+    background: rgba(255, 165, 0, 0.15);
+    box-shadow: 0 0 20px rgba(255, 165, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+/* With hints - blue */
+.write-mode-btn-hints {
+    border-color: #00FFFF;
+    color: #00FFFF;
+}
+
+.write-mode-btn-hints:hover {
+    background: rgba(0, 255, 255, 0.15);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

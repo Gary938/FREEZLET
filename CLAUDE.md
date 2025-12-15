@@ -21,6 +21,35 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Important**: Run webpack rebuild after any changes to renderer-side code
 - **Do not** run webpack rebuild for Main process changes or when only editing documentation (.md files)
 
+## GitHub Repository
+
+**Repository**: https://github.com/Gary938/FREEZLET
+
+### Git Commands
+```bash
+git status                      # Проверить статус
+git add .                       # Добавить все файлы
+git commit -m "message"         # Создать коммит
+git push                        # Отправить на GitHub
+git pull                        # Получить изменения
+```
+
+### GitHub CLI (gh)
+```bash
+gh repo view                    # Информация о репозитории
+gh issue list                   # Список issues
+gh issue create                 # Создать issue
+gh pr list                      # Список pull requests
+gh pr create                    # Создать pull request
+gh release create v1.0.0        # Создать релиз
+```
+
+### Workflow
+1. Внести изменения в код
+2. `git add .` - добавить изменения
+3. `git commit -m "описание"` - зафиксировать
+4. `git push` - отправить на GitHub
+
 ## Architecture Overview
 
 ### Technology Stack

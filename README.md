@@ -44,10 +44,29 @@
 - **Write Mode** - Practice spelling by typing answers
 - **8 Languages** - Interface available in EN, DE, ES, FR, PT, UK, ZH, PL
 - **Progress Tracking** - SQLite database stores your learning history
-- **Custom Backgrounds** - Upload your own images or use story/random modes
+- **Dynamic Backgrounds** - Multiple background modes for immersive learning
 - **Category Organization** - Hierarchical folder structure for tests
 - **Merge Tests** - Combine multiple tests into one
 - **Prompt Builder** - AI-assisted test creation helper
+
+---
+
+## Background System
+
+FREEZLET features a unique background system that makes learning more engaging:
+
+| Mode | Description |
+|------|-------------|
+| **Story Mode** | Sequential backgrounds that tell a visual story as you progress |
+| **Random Mode** | Random AI-generated backgrounds for variety |
+| **My Backgrounds** | Upload and use your own images |
+| **Load Background** | Load a single custom image |
+
+### Features:
+- **AI-generated artwork** - Beautiful, immersive backgrounds
+- **Progress visualization** - Backgrounds change as you advance
+- **Personal gallery** - Save your favorite backgrounds
+- **Full customization** - Use any image you like
 
 ---
 

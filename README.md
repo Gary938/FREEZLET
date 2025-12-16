@@ -27,6 +27,10 @@
 ![Learning Mode Alternative](docs/screenshots/learn-mode-2.png)
 *Dynamic backgrounds change as you progress through the test*
 
+### Write Mode
+![Write Mode](docs/screenshots/write-mode.png)
+*Type your answers with hints available - practice spelling and recall*
+
 ---
 
 ## Features

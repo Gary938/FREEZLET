@@ -279,5 +279,5 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ---
 
 <p align="center">
-  Made with ❤️ for learners everywhere
+  Made with ❤️ for learners
 </p>

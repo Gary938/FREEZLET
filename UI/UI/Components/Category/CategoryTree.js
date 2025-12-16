@@ -100,7 +100,11 @@ export class CategoryTree {
    * @param {string} message - Message text
    */
   showError(message) {
-    this.container.innerHTML = `<div class="error-message">${message}</div>`;
+    const errorElement = document.createElement('div');
+    errorElement.className = 'error-message';
+    errorElement.textContent = message;
+    this.container.innerHTML = '';
+    this.container.appendChild(errorElement);
   }
 
   /**

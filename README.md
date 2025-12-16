@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <b>A gamified desktop application for learning languages and memorizing vocabulary with Pacman-style progress tracking</b>
+  <b>A gamified desktop application for learning and memorizing anything - languages, math, science, history and more - with Pacman-style progress tracking</b>
 </p>
 
 ---
@@ -176,16 +176,34 @@ FREEZLET/
 Tests are simple text files with `question | answer` format:
 
 ```
-# Example: English-Spanish vocabulary
+# Example: Vocabulary
 hello | hola
-goodbye | adiós
-thank you | gracias
-please | por favor
+apple | яблоко
+```
+
+```
+# Example: Math
+2 + 2 | 4
+√144 | 12
+15% of 200 | 30
+```
+
+```
+# Example: Science
+H2O | Water
+Speed of light | 299,792,458 m/s
+Largest planet | Jupiter
+```
+
+```
+# Example: History
+Year WW2 ended | 1945
+First US President | George Washington
 ```
 
 ### Advanced Format
 ```
-# With phonetic transcription
+# With phonetic transcription (for languages)
 Appeal [əˈpiːl] | to
 Depend [dɪˈpend] | on
 ```
@@ -242,5 +260,5 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ---
 
 <p align="center">
-  Made with ❤️ for language learners
+  Made with ❤️ for learners everywhere
 </p>

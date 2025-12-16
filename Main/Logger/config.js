@@ -8,7 +8,7 @@ import { app } from 'electron';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
-// Get project root path
+// Get project root path (for dev mode only)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const projectRoot = path.resolve(__dirname, '../../');
@@ -17,10 +17,18 @@ const projectRoot = path.resolve(__dirname, '../../');
 // app.isPackaged is true when the app is built/packaged (not running via npm start)
 const isProduction = process.env.NODE_ENV === 'production' || app.isPackaged;
 
+// Get correct logs directory based on environment
+const getLogsDirectory = () => {
+  if (isProduction) {
+    return path.join(app.getPath('userData'), 'logs');
+  }
+  return path.join(projectRoot, 'logs');
+};
+
 // Default configuration
 export const DEFAULT_CONFIG = {
-  // File paths - all logs inside project
-  logDirectory: path.join(projectRoot, 'logs'),
+  // File paths - logs in userData for production, project root for dev
+  logDirectory: getLogsDirectory(),
   mainLogFile: 'app.log',
   ipcLogFile: 'ipc.log',
   sessionLogFile: 'session.log',

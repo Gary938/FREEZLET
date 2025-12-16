@@ -1,5 +1,6 @@
 import path from 'path';
 import { createApiLogger, logApiStart, logApiSuccess, logApiError } from '../../Logger/apiLogger.js';
+import { getBasePath } from '../../Utils/appPaths.js';
 
 // Import business layer modules
 import { testRepository } from '../../BusinessLayer/DB/testRepository.js';
@@ -138,7 +139,7 @@ export async function deleteMergedTest(testPath) {
     
     // Form physical path to file
     const fullPath = dbResult.path;
-    const physicalPath = path.join(process.cwd(), fullPath);
+    const physicalPath = path.join(getBasePath(), fullPath);
     
     // Use business layer to delete file
     const fsResult = await testFsOperations.deleteTestFile(physicalPath);
@@ -183,10 +184,10 @@ export async function mergeTests(testPaths, outputFileName) {
     }
     
     // Form full path for output file
-    const outputPath = path.join(process.cwd(), 'Tests', 'Merged Tests', outputFileName.endsWith('.txt') ? outputFileName : `${outputFileName}.txt`);
-    
+    const outputPath = path.join(getBasePath(), 'Tests', 'Merged Tests', outputFileName.endsWith('.txt') ? outputFileName : `${outputFileName}.txt`);
+
     // Use business layer to merge tests
-    const mergeResult = await testFsOperations.mergeTests(testPaths.map(p => path.join(process.cwd(), p)), outputPath);
+    const mergeResult = await testFsOperations.mergeTests(testPaths.map(p => path.join(getBasePath(), p)), outputPath);
     
     if (!mergeResult.success) {
       logApiError(logger, 'mergeTests', new Error(mergeResult.error));

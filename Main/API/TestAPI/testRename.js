@@ -3,6 +3,7 @@
 
 import path from 'path';
 import { createApiLogger, logApiStart, logApiSuccess, logApiError } from '../../Logger/apiLogger.js';
+import { getBasePath } from '../../Utils/appPaths.js';
 
 // Import business layer via central hub
 import businessLayer from '../../businessLayerHub.js';
@@ -61,8 +62,8 @@ export async function renameTest(testPath, newName) {
     logger.debug('Test renamed in DB successfully');
 
     // 7. FS SECOND: Rename file in file system
-    const oldOsPath = testPath.split('/').join(path.sep);
-    const newOsPath = newPath.split('/').join(path.sep);
+    const oldOsPath = path.join(getBasePath(), testPath.split('/').join(path.sep));
+    const newOsPath = path.join(getBasePath(), newPath.split('/').join(path.sep));
 
     const fsResult = await businessLayer.fs.test.renameTestFile(oldOsPath, newOsPath);
 

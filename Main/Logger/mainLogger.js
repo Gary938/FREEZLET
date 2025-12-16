@@ -117,8 +117,8 @@ export const mainLogger = {
    */
   init: (customConfig) => {
     if (customConfig) {
-      // Merge custom settings with default settings
-      Object.assign(mainLogger.config, customConfig);
+      // Create a new merged config object instead of mutating (avoids getter issues)
+      mainLogger.config = { ...mainLogger.config, ...customConfig };
       console.log('Logger initialized with custom settings');
     }
     return mainLogger;

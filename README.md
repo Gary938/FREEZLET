@@ -22,6 +22,7 @@
 ## Table of Contents
 
 - [Demo](#demo)
+- [Download](#download)
 - [Why FREEZLET?](#why-freezlet)
 - [Screenshots](#screenshots)
 - [Features](#features)
@@ -42,6 +43,24 @@
 <p align="center">
   <img src="docs/demo.gif" alt="FREEZLET Demo" width="700">
 </p>
+
+---
+
+## Download
+
+<p align="center">
+  <a href="https://github.com/Gary938/FREEZLET/releases/latest">
+    <img src="https://img.shields.io/github/v/release/Gary938/FREEZLET?style=for-the-badge&logo=github" alt="Latest Release">
+  </a>
+</p>
+
+| Platform | Download |
+|----------|----------|
+| **Windows** | [FREEZLET-Setup.exe](https://github.com/Gary938/FREEZLET/releases/latest) |
+| **macOS** | [FREEZLET.dmg](https://github.com/Gary938/FREEZLET/releases/latest) |
+| **Linux** | [FREEZLET.AppImage](https://github.com/Gary938/FREEZLET/releases/latest) |
+
+> **Note**: Download links will be available after the first release. See [Installation](#installation) for building from source.
 
 ---
 

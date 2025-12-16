@@ -1,10 +1,11 @@
 // Interactive/Background/Config/backgroundConfig.js - Background system configuration
 
 import path from 'path';
+import { getUIAssetsContentPath } from '../../../../../Utils/appPaths.js';
 
 // CONFIG
 export const BACKGROUND_CONFIG = {
-    BACKGROUNDS_PATH: path.join(process.cwd(), 'UI', 'LearnMode', 'Assets', 'Content'),
+    BACKGROUNDS_PATH: getUIAssetsContentPath(),
     SUPPORTED_EXTENSIONS: ['.jpg', '.jpeg', '.png', '.webp', '.gif'],
     DEFAULT_MODE: 'random',
     MODES: ['random', 'story', 'custom']

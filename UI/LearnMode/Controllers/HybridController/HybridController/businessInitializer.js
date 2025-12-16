@@ -25,7 +25,11 @@ export const initializeBusinessBridge = async () => {
 export const startBusinessTest = async (businessBridge, testPath) => {
     const businessData = await businessBridge.startTest(testPath);
     if (!businessData.success) {
-        throw new Error(`START_TEST_FAILED: ${businessData.error?.message}`);
+        // Format error message properly
+        const errorMsg = businessData.error?.message
+            || (typeof businessData.error === 'string' ? businessData.error : JSON.stringify(businessData.error));
+        console.error('[startBusinessTest] Failed:', { testPath, error: businessData.error });
+        throw new Error(`START_TEST_FAILED: ${errorMsg}`);
     }
     return businessData;
 }; 

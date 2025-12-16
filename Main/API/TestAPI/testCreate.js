@@ -8,6 +8,7 @@ import {
   getLastFolderFromPath,
   categoryExistsInDB
 } from '../../Utils/pathUtils.js';
+import { getBasePath } from '../../Utils/appPaths.js';
 
 // Import business layer via central hub
 import businessLayer from '../../businessLayerHub.js';
@@ -66,8 +67,9 @@ export async function createTestFromContent(categoryPath, testName, content) {
 
     // 6. Form standardized destination path
     const destinationPath = `${normalizedCategoryPath}/${sanitizedName}`;
-    const osSpecificDestPath = destinationPath.split('/').join(path.sep);
-    logger.debug(`Destination path: ${destinationPath}`);
+    // Convert relative path to absolute using getBasePath()
+    const osSpecificDestPath = path.join(getBasePath(), destinationPath.split('/').join(path.sep));
+    logger.debug(`Destination path: ${destinationPath}, absolute: ${osSpecificDestPath}`);
 
     // 7. Count questions in content
     const contentResult = businessLayer.fs.test.countQuestionsInContent(content);

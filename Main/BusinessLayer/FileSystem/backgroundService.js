@@ -5,6 +5,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import { mainLogger } from '../../loggerHub.js';
 import { db } from '../../db.js';
+import { getUIAssetsContentPath, getAppBasePath } from '../../Utils/appPaths.js';
 
 // Constants
 const TABLE = "backgroundState";
@@ -113,7 +114,7 @@ export const backgroundService = {
       try {
         if (mode === "random") {
           // For random mode find image in Random folder
-          const randomFolder = path.join(process.cwd(), "UI", "LearnMode", "Assets", "Content", "Random");
+          const randomFolder = path.join(getUIAssetsContentPath(), "Random");
           const folderExists = await fs.access(randomFolder).then(() => true).catch(() => false);
           
           if (folderExists) {
@@ -136,7 +137,7 @@ export const backgroundService = {
           }
         } else if (mode === "story") {
           // For story mode find image in Stories subfolders
-          const storiesMainFolder = path.join(process.cwd(), "UI", "LearnMode", "Assets", "Content", "Stories");
+          const storiesMainFolder = path.join(getUIAssetsContentPath(), "Stories");
           const folderExists = await fs.access(storiesMainFolder).then(() => true).catch(() => false);
           
           if (folderExists) {
@@ -227,7 +228,7 @@ export const backgroundService = {
    */
   async getRandomBackground(folderPath) {
     try {
-      const defaultPath = path.join(process.cwd(), "UI", "TestRunner", "Assets", "Content", "WEBp");
+      const defaultPath = path.join(getAppBasePath(), "UI", "TestRunner", "Assets", "Content", "WEBp");
       const targetPath = (typeof folderPath === "string" && folderPath.trim()) ? folderPath : defaultPath;
       
       const files = await fs.readdir(targetPath);

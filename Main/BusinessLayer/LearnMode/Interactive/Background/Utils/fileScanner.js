@@ -6,6 +6,7 @@ import { BACKGROUND_CONFIG } from '../Config/backgroundConfig.js';
 import { trace } from '../../../Utils/tracer.js';
 import { promises as fs } from 'fs';
 import path from 'path';
+import { getAppBasePath } from '../../../../../Utils/appPaths.js';
 
 // OPERATIONS
 export const scanImageFiles = async (directoryPath) => {
@@ -61,7 +62,7 @@ const filterImageFiles = (files, directoryPath) => {
         .filter(file => isImageFile(file))
         .map(file => {
             const absolutePath = path.join(directoryPath, file);
-            const relativePath = path.relative(process.cwd(), absolutePath);
+            const relativePath = path.relative(getAppBasePath(), absolutePath);
             return relativePath.replace(/\\/g, '/');
         })
         .sort((a, b) => {

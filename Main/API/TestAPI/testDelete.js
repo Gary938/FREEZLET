@@ -4,6 +4,7 @@
 import path from 'path';
 import { createApiLogger, logApiStart, logApiSuccess, logApiError } from '../../Logger/apiLogger.js';
 import { formatPathForQuery } from '../../Utils/pathUtils.js';
+import { getBasePath } from '../../Utils/appPaths.js';
 
 // Import business layer modules
 import { testRepository } from '../../BusinessLayer/DB/testRepository.js';
@@ -40,7 +41,7 @@ export async function deleteTest(testPath) {
     }
     
     // Delete physical file using business layer
-    const osSpecificPath = normalizedTestPath.split('/').join(path.sep);
+    const osSpecificPath = path.join(getBasePath(), normalizedTestPath.split('/').join(path.sep));
     const fsResult = await testFsOperations.deleteTestFile(osSpecificPath);
     
     // Even if file deletion failed, we consider operation successful,
@@ -90,7 +91,7 @@ export async function deleteAllTestsFromCategory(categoryName) {
       // Delete all physical test files
       for (const testPath of dbResult.deletedPaths) {
         try {
-          const osSpecificPath = testPath.split('/').join(path.sep);
+          const osSpecificPath = path.join(getBasePath(), testPath.split('/').join(path.sep));
           await testFsOperations.deleteTestFile(osSpecificPath);
         } catch (fileError) {
           // Log error, but continue deleting other files

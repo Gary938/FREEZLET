@@ -50,7 +50,7 @@ export const createSuccessResult = (data, extensions = {}) => ({
 
 export const createErrorResult = (error, code = 'UNKNOWN_ERROR') => ({
     success: false,
-    error,
+    error: typeof error === 'string' ? error : (error?.message || JSON.stringify(error)),
     code
 });
 

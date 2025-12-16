@@ -1,7 +1,7 @@
 /**
  * Main/Logger/learnModeLogger.js
  * Learn mode logging system
- * 
+ *
  * Tracks start and end markers of learn mode
  * and writes logs to separate learndebug.jsonl file
  */
@@ -9,9 +9,10 @@
 import fs from 'fs';
 import path from 'path';
 import { mainLogger } from '../loggerHub.js';
+import { getLogsPath } from '../Utils/appPaths.js';
 
 // Path to learn mode log file
-const LEARN_DEBUG_LOG_PATH = path.join(process.cwd(), 'learndebug.jsonl');
+const LEARN_DEBUG_LOG_PATH = path.join(getLogsPath(), 'learndebug.jsonl');
 
 // Variable to track learn mode state
 let isLearnModeActive = false;

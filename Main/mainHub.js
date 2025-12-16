@@ -9,6 +9,7 @@ import fsSync from "fs";
 import { mainLogger } from './loggerHub.js';
 import { clearLogFiles } from './Logger/utils.js';
 import { ipcLogger, hijackIPCLogging, initLearnModeLogging, setupExceptionHandling } from "./loggerHub.js";
+import { getLogsPath } from './Utils/appPaths.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -18,12 +19,19 @@ const isDev = !app.isPackaged;
 app.commandLine.appendSwitch('disable-vulkan');
 app.commandLine.appendSwitch('disable-features', 'Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,WebGPU');
 
-// Initialize logger with settings - use local paths
+// Get log paths - use userData in production, project root in dev
 const projectRoot = path.resolve(__dirname, '../');
+const logsDir = isDev ? path.join(projectRoot, 'logs') : getLogsPath();
+const legacyLogPath = isDev ? path.join(projectRoot, 'debug.log') : null;
+const aiLogPath = isDev ? path.join(projectRoot, 'ai_debug.jsonl') : null;
+
+// Initialize logger with correct paths
 mainLogger.init({
-  logDirectory: path.join(projectRoot, 'logs'),
-  legacyLogFile: path.join(projectRoot, 'debug.log'),
-  aiLogFile: path.join(projectRoot, 'ai_debug.jsonl'),
+  logDirectory: logsDir,
+  legacyLogFile: legacyLogPath,
+  aiLogFile: aiLogPath,
+  useLegacyLogFile: isDev,
+  useAiLogFile: isDev,
   minLogLevel: process.env.NODE_ENV === 'production' ? 'info' : 'trace',
   captureIPC: true,
   appVersion: app.getVersion()
@@ -38,10 +46,32 @@ setupExceptionHandling(mainLogger);
 // Initialize learn mode log monitoring
 initLearnModeLogging();
 
-// Clear log files on startup
-const legacyLogPath = path.join(projectRoot, 'debug.log');
-const aiLogPath = path.join(projectRoot, 'ai_debug.jsonl');
-clearLogFiles(legacyLogPath, aiLogPath);
+// Clear ALL log files on startup (including logs/ directory)
+const clearAllLogs = () => {
+  try {
+    // Clear legacy logs in dev mode
+    if (isDev && legacyLogPath) {
+      clearLogFiles(legacyLogPath, aiLogPath);
+    }
+
+    // Clear logs in logs/ directory
+    if (fsSync.existsSync(logsDir)) {
+      const logFiles = fsSync.readdirSync(logsDir);
+      for (const file of logFiles) {
+        if (file.endsWith('.log')) {
+          const filePath = path.join(logsDir, file);
+          fsSync.writeFileSync(filePath, '', 'utf8');
+        }
+      }
+    }
+    return true;
+  } catch (error) {
+    console.error('Error clearing log files:', error);
+    return false;
+  }
+};
+
+clearAllLogs();
 mainLogger.info('System', 'Log files cleared on startup');
 
 // Log startup information

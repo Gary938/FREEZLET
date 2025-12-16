@@ -6,6 +6,7 @@ import { selectNextStory } from './selector.js';
 import { createSuccessResult, createErrorResult } from '../../../../Core/errorHandler.js';
 import { trace } from '../../../../Utils/tracer.js';
 import path from 'path';
+import { getAppBasePath } from '../../../../../../Utils/appPaths.js';
 
 // OPERATIONS
 export const findNextSlide = async (currentPath) => {
@@ -46,7 +47,7 @@ const extractSlideInfo = (currentPath) => {
     let workingPath = currentPath;
     // Convert relative paths to absolute
     if (!path.isAbsolute(currentPath)) {
-        workingPath = path.join(process.cwd(), currentPath);
+        workingPath = path.join(getAppBasePath(), currentPath);
     }
 
     const storyPath = path.dirname(workingPath);

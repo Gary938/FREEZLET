@@ -8,6 +8,7 @@ import { saveMyBackgroundState, loadMyBackgroundState } from './DB/myBackgroundS
 import { promises as fs } from 'fs';
 import path from 'path';
 import { dialog } from 'electron';
+import { getBasePath } from '../../../../Utils/appPaths.js';
 
 // OPERATIONS
 export const loadMyBackground = async (browserWindow) => {
@@ -30,7 +31,7 @@ export const loadMyBackground = async (browserWindow) => {
 
             try {
                 await fs.copyFile(sourcePath, destPath);
-                const relativePath = path.relative(process.cwd(), destPath).replace(/\\/g, '/');
+                const relativePath = path.relative(getBasePath(), destPath).replace(/\\/g, '/');
                 results.uploaded.push({ fileName, relativePath });
             } catch (error) {
                 results.failed.push({ fileName, error: error.message });
@@ -88,7 +89,10 @@ export const selectMyBackground = async (imagePath) => {
     }
 
     try {
-        const absolutePath = path.join(process.cwd(), imagePath);
+        // Handle file:// protocol paths (production) vs relative paths (dev)
+        const absolutePath = imagePath.startsWith('file://')
+            ? imagePath.replace('file://', '')
+            : path.join(getBasePath(), imagePath);
         await fs.access(absolutePath);
     } catch {
         return createErrorResult(`File not found: ${imagePath}`, 'FILE_NOT_FOUND');

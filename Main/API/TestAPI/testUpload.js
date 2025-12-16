@@ -3,11 +3,12 @@
 
 import path from 'path';
 import { createApiLogger, logApiStart, logApiSuccess, logApiError } from '../../Logger/apiLogger.js';
-import { 
+import {
   normalizeFolderPath,
   getLastFolderFromPath,
   categoryExistsInDB
 } from '../../Utils/pathUtils.js';
+import { getBasePath } from '../../Utils/appPaths.js';
 
 // Import business layer via central hub
 import businessLayer from '../../businessLayerHub.js';
@@ -57,8 +58,9 @@ export async function uploadTest(sourcePath, categoryPath) {
     
     // 6. Form standardized destination path
     const destinationPath = `${normalizedCategoryPath}/${fileName}`;
-    const osSpecificDestPath = destinationPath.split('/').join(path.sep);
-    logger.debug(`Destination path: ${destinationPath}`);
+    // Convert relative path to absolute using getBasePath()
+    const osSpecificDestPath = path.join(getBasePath(), destinationPath.split('/').join(path.sep));
+    logger.debug(`Destination path: ${destinationPath}, absolute: ${osSpecificDestPath}`);
     
     // 7. Upload file using business layer via hub
     const fsResult = await businessLayer.fs.test.uploadTestFile(sourcePath, osSpecificDestPath);

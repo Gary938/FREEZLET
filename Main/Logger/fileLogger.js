@@ -5,12 +5,16 @@
 
 import fs from 'fs';
 import path from 'path';
+import { app } from 'electron';
 import { rotateLogFile } from './utils.js';
-import { 
-  formatForFile, 
-  formatForLegacyFile, 
+import {
+  formatForFile,
+  formatForLegacyFile,
   formatForAILog
 } from './formatters.js';
+
+// Track if legacy log was cleared this session
+let legacyLogCleared = false;
 
 /**
  * Write log to main file, session file and legacy file
@@ -62,8 +66,15 @@ export function writeToLogFiles(level, mod, msg, data, config, sequenceId) {
  */
 export function writeToLogFile(message) {
   try {
-    // Write log to debug.log
+    // Write log to debug.log in current working directory
     const logPath = path.resolve('debug.log');
+
+    // Clear log on first write of this session
+    if (!legacyLogCleared) {
+      fs.writeFileSync(logPath, '', 'utf8');
+      legacyLogCleared = true;
+    }
+
     fs.appendFileSync(logPath, message + '\n', 'utf8');
     return true;
   } catch (error) {

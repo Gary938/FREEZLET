@@ -3,13 +3,36 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import { trace } from './tracer.js';
+import { getBasePath, getAppBasePath } from '../../../Utils/appPaths.js';
 
 // CONFIG
 const FILE_CONFIG = {
     MAX_FILE_SIZE: 10 * 1024 * 1024,  // 10MB
     MAX_PATH_LENGTH: 1024,
     // Allowed base directories for file loading
-    ALLOWED_BASE_DIRS: ['Tests', 'CSS']
+    // Tests is in extraResources (getBasePath), CSS is in app.asar (getAppBasePath)
+    ALLOWED_BASE_DIRS: [
+        { dir: 'Tests', getBase: getBasePath },
+        { dir: 'CSS', getBase: getAppBasePath }
+    ]
+};
+
+// Convert relative path to absolute using appropriate base directory
+const resolveFilePath = (filePath) => {
+    // If already absolute, return as-is
+    if (path.isAbsolute(filePath)) {
+        return filePath;
+    }
+
+    // Determine base directory from path prefix
+    for (const { dir, getBase } of FILE_CONFIG.ALLOWED_BASE_DIRS) {
+        if (filePath.startsWith(dir + '/') || filePath.startsWith(dir + path.sep)) {
+            return path.join(getBase(), filePath);
+        }
+    }
+
+    // Default: use getBasePath for Tests
+    return path.join(getBasePath(), filePath);
 };
 
 // Basic path validation (sync)
@@ -36,18 +59,15 @@ const validateSecurePath = async (filePath) => {
         // Resolve symlinks and get real absolute path
         const realPath = await fs.realpath(filePath);
 
-        // Get base application path
-        const basePath = process.cwd();
-
-        // Check if path starts with allowed base directory (not just contains)
-        const isAllowed = FILE_CONFIG.ALLOWED_BASE_DIRS.some(dir => {
-            const allowedPath = path.join(basePath, dir);
+        // Check if path starts with any allowed base directory (not just contains)
+        const isAllowed = FILE_CONFIG.ALLOWED_BASE_DIRS.some(({ dir, getBase }) => {
+            const allowedPath = path.join(getBase(), dir);
             // Path must START with allowed directory
             return realPath.startsWith(allowedPath + path.sep) || realPath === allowedPath;
         });
 
         if (!isAllowed) {
-            trace('securityBlock', { filePath, realPath, basePath, reason: 'outside allowed dirs' });
+            trace('securityBlock', { filePath, realPath, reason: 'outside allowed dirs' });
             return { valid: false, error: 'Access denied: file outside allowed directories' };
         }
 
@@ -68,8 +88,12 @@ export const loadFile = async (filePath) => {
         return { success: false, error: pathValidation.error };
     }
 
-    // Step 2: Enhanced security check (resolves symlinks)
-    const secureValidation = await validateSecurePath(filePath);
+    // Step 2: Resolve relative path to absolute
+    const absolutePath = resolveFilePath(filePath);
+    trace('loadFile:resolved', { filePath, absolutePath });
+
+    // Step 3: Enhanced security check (resolves symlinks)
+    const secureValidation = await validateSecurePath(absolutePath);
     if (!secureValidation.valid) {
         return { success: false, error: secureValidation.error };
     }
@@ -116,18 +140,21 @@ export const isReadable = async (filePath) => {
 };
 
 export const validateFileAccess = async (filePath) => {
-    const existsResult = await fileExists(filePath);
+    // Resolve relative path to absolute
+    const absolutePath = resolveFilePath(filePath);
+
+    const existsResult = await fileExists(absolutePath);
     if (!existsResult.exists) {
         return { valid: false, error: 'File not found' };
     }
 
-    const readableResult = await isReadable(filePath);
+    const readableResult = await isReadable(absolutePath);
     if (!readableResult.readable) {
         return { valid: false, error: 'File is not readable' };
     }
 
     // Security check
-    const secureValidation = await validateSecurePath(filePath);
+    const secureValidation = await validateSecurePath(absolutePath);
     if (!secureValidation.valid) {
         return { valid: false, error: secureValidation.error };
     }
@@ -137,10 +164,14 @@ export const validateFileAccess = async (filePath) => {
 
 // HELPERS
 export const safeLoad = async (filePath) => {
-    const validation = await validateFileAccess(filePath);
+    // Resolve relative path to absolute first
+    const absolutePath = resolveFilePath(filePath);
+    trace('safeLoad', { filePath, absolutePath });
+
+    const validation = await validateFileAccess(absolutePath);
     if (!validation.valid) {
         return { success: false, error: validation.error };
     }
 
-    return loadFile(filePath);
+    return loadFile(absolutePath);
 }; 

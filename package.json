@@ -1,9 +1,13 @@
 {
-  "name": "quiz-application",
+  "name": "freezlet",
+  "productName": "FREEZLET",
   "version": "1.0.0",
   "description": "Desktop quiz application with gamified learning mode built on Electron",
   "license": "MIT",
-  "author": "Gary938",
+  "author": {
+    "name": "Gary938",
+    "email": "gary938@users.noreply.github.com"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Gary938/FREEZLET.git"
@@ -18,7 +22,8 @@
     "learning",
     "education",
     "flashcards",
-    "desktop-app"
+    "desktop-app",
+    "gamification"
   ],
   "type": "module",
   "main": "Main/mainHub.js",
@@ -26,12 +31,17 @@
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "check-api": "node Main/Utils/checkApiConsistency.js",
-    "build": "webpack --config webpack.renderer.config.cjs && webpack --config webpack.preload.config.cjs"
+    "build": "webpack --config webpack.renderer.config.cjs && webpack --config webpack.preload.config.cjs",
+    "rebuild": "electron-rebuild -f -w better-sqlite3",
+    "postinstall": "electron-builder install-app-deps",
+    "dist": "npm run build && electron-builder",
+    "dist:win": "npm run build && electron-builder --win",
+    "dist:mac": "npm run build && electron-builder --mac",
+    "dist:linux": "npm run build && electron-builder --linux"
   },
   "dependencies": {
     "better-sqlite3": "^12.2.0",
     "chalk": "^5.4.1",
-    "electron": "^28.0.0",
     "i18next": "^25.7.2"
   },
   "devDependencies": {
@@ -42,6 +52,8 @@
     "babel-loader": "^10.0.0",
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.1",
+    "electron": "^28.0.0",
+    "electron-builder": "^24.13.3",
     "electron-rebuild": "^3.2.9",
     "node-polyfill-webpack-plugin": "^4.1.0",
     "os-browserify": "^0.3.0",
@@ -53,6 +65,79 @@
     "webpack": "^5.99.5",
     "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^6.0.1"
+  },
+  "build": {
+    "appId": "com.gary938.freezlet",
+    "productName": "FREEZLET",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "Main/**/*",
+      "UI/**/*",
+      "Preload/**/*",
+      "Locales/**/*",
+      "CSS/**/*",
+      "dist/**/*",
+      "index.html",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "Tests",
+        "to": "Tests",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "Progress",
+        "to": "Progress",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "MyBackground",
+        "to": "MyBackground",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.education",
+      "icon": "build/icon.png"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "icon": "build/icon.ico"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Education",
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico"
+    },
+    "appImage": {
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    }
   },
   "sideEffects": [
     "*.css"

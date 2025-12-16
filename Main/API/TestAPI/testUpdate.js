@@ -3,6 +3,7 @@
 
 import path from 'path';
 import { createApiLogger, logApiStart, logApiSuccess, logApiError } from '../../Logger/apiLogger.js';
+import { getBasePath } from '../../Utils/appPaths.js';
 
 // Import business layer via central hub
 import businessLayer from '../../businessLayerHub.js';
@@ -25,8 +26,8 @@ export async function getTestContent(testPath) {
       return { success: false, error: 'Test path not specified' };
     }
 
-    // 2. Convert to OS-specific path
-    const osPath = testPath.split('/').join(path.sep);
+    // 2. Convert to OS-specific absolute path
+    const osPath = path.join(getBasePath(), testPath.split('/').join(path.sep));
 
     // 3. Read content using business layer
     const result = await businessLayer.fs.test.readTestContent(osPath);
@@ -68,8 +69,8 @@ export async function updateTestContent(testPath, content) {
       return { success: false, error: 'Content not specified' };
     }
 
-    // 2. Convert to OS-specific path
-    const osPath = testPath.split('/').join(path.sep);
+    // 2. Convert to OS-specific absolute path
+    const osPath = path.join(getBasePath(), testPath.split('/').join(path.sep));
 
     // 3. Count questions in new content
     const countResult = businessLayer.fs.test.countQuestionsInContent(content);

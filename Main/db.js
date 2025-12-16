@@ -1,15 +1,22 @@
 // 📦 db.js — SQLite database initialization
 import path from "path";
 import fs from "fs";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
 import Database from "better-sqlite3";
+import { getDbPath, getTestsPath, getProgressPath } from "./Utils/appPaths.js";
 import { mainLogger } from "./loggerHub.js";
+import { initializeUserData } from "./Utils/dataInitializer.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// Initialize user data on first launch (copy Tests, MyBackground from resources)
+initializeUserData();
 
-const dbPath = path.join(__dirname, "../Progress/structure.db");
+const dbPath = getDbPath();
+
+// Ensure Progress directory exists (backup check, dataInitializer should handle this)
+const progressDir = getProgressPath();
+if (!fs.existsSync(progressDir)) {
+  fs.mkdirSync(progressDir, { recursive: true });
+}
+
 export const db = new Database(dbPath);
 mainLogger.ready("Main/db.js — database connected: structure.db");
 
@@ -40,6 +47,11 @@ try {
       key TEXT PRIMARY KEY,
       value TEXT
     );
+
+    CREATE TABLE IF NOT EXISTS last_category (
+      id INTEGER PRIMARY KEY DEFAULT 1,
+      full_path TEXT NOT NULL
+    );
   `);
 
   // Check if is_category_marker column exists, add if not
@@ -57,7 +69,7 @@ try {
 
   // Migration: rename MERGE → Merged Tests
   try {
-    const testsDir = path.join(__dirname, "../Tests");
+    const testsDir = getTestsPath();
     const oldMergePath = path.join(testsDir, "MERGE");
     const newMergePath = path.join(testsDir, "Merged Tests");
 

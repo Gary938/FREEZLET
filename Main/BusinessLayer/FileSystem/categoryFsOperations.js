@@ -5,6 +5,15 @@ import fs from 'fs/promises';
 import { existsSync } from 'fs';
 import path from 'path';
 import { mainLogger } from '../../loggerHub.js';
+import { getBasePath } from '../../Utils/appPaths.js';
+
+// Helper: convert relative path to absolute
+const toAbsolutePath = (relativePath) => {
+  if (path.isAbsolute(relativePath)) {
+    return relativePath;
+  }
+  return path.join(getBasePath(), relativePath);
+};
 
 // Logger for module
 const logger = {
@@ -22,7 +31,8 @@ const logger = {
  */
 export function directoryExists(dirPath) {
   try {
-    return existsSync(dirPath) && existsSync(path.resolve(dirPath));
+    const absolutePath = toAbsolutePath(dirPath);
+    return existsSync(absolutePath) && existsSync(path.resolve(absolutePath));
   } catch (error) {
     logger.error(`Error checking directory existence: ${error.message}`);
     return false;
@@ -36,14 +46,15 @@ export function directoryExists(dirPath) {
  */
 export async function createDirectory(categoryPath) {
   try {
+    const absolutePath = toAbsolutePath(categoryPath);
     if (directoryExists(categoryPath)) {
-      logger.warn(`Category directory already exists: ${categoryPath}`);
+      logger.warn(`Category directory already exists: ${absolutePath}`);
       return { success: true, created: false };
     }
-    
-    await fs.mkdir(categoryPath, { recursive: true });
-    logger.info(`Category directory created: ${categoryPath}`);
-    
+
+    await fs.mkdir(absolutePath, { recursive: true });
+    logger.info(`Category directory created: ${absolutePath}`);
+
     return { success: true, created: true };
   } catch (error) {
     logger.error(`Error creating category directory: ${error.message}`);
@@ -58,14 +69,15 @@ export async function createDirectory(categoryPath) {
  */
 export async function deleteDirectory(categoryPath) {
   try {
+    const absolutePath = toAbsolutePath(categoryPath);
     if (!directoryExists(categoryPath)) {
-      logger.warn(`Category directory does not exist: ${categoryPath}`);
+      logger.warn(`Category directory does not exist: ${absolutePath}`);
       return { success: true, deleted: false };
     }
-    
-    await fs.rm(categoryPath, { recursive: true, force: true });
-    logger.info(`Category directory deleted: ${categoryPath}`);
-    
+
+    await fs.rm(absolutePath, { recursive: true, force: true });
+    logger.info(`Category directory deleted: ${absolutePath}`);
+
     return { success: true, deleted: true };
   } catch (error) {
     logger.error(`Error deleting category directory: ${error.message}`);
@@ -81,29 +93,32 @@ export async function deleteDirectory(categoryPath) {
  */
 export async function renameDirectory(oldPath, newPath) {
   try {
+    const absoluteOldPath = toAbsolutePath(oldPath);
+    const absoluteNewPath = toAbsolutePath(newPath);
+
     // Check old directory existence
     if (!directoryExists(oldPath)) {
-      logger.warn(`Source directory does not exist: ${oldPath}`);
+      logger.warn(`Source directory does not exist: ${absoluteOldPath}`);
       return { success: false, error: 'Source directory does not exist' };
     }
-    
+
     // Check new directory existence
     if (directoryExists(newPath)) {
-      logger.warn(`Target directory already exists: ${newPath}`);
+      logger.warn(`Target directory already exists: ${absoluteNewPath}`);
       return { success: false, error: 'Target directory already exists' };
     }
-    
+
     // Create parent directory for new path if it doesn't exist
-    const newParentDir = path.dirname(newPath);
-    if (!directoryExists(newParentDir)) {
+    const newParentDir = path.dirname(absoluteNewPath);
+    if (!existsSync(newParentDir)) {
       await fs.mkdir(newParentDir, { recursive: true });
       logger.info(`Parent directory created: ${newParentDir}`);
     }
-    
+
     // Rename directory
-    await fs.rename(oldPath, newPath);
-    logger.info(`Directory renamed: ${oldPath} -> ${newPath}`);
-    
+    await fs.rename(absoluteOldPath, absoluteNewPath);
+    logger.info(`Directory renamed: ${absoluteOldPath} -> ${absoluteNewPath}`);
+
     return { success: true };
   } catch (error) {
     logger.error(`Error renaming directory: ${error.message}`);
@@ -118,22 +133,24 @@ export async function renameDirectory(oldPath, newPath) {
  */
 export async function getCategoryContents(categoryPath) {
   try {
+    const absolutePath = toAbsolutePath(categoryPath);
+
     // Check directory existence
     if (!directoryExists(categoryPath)) {
-      logger.warn(`Directory does not exist: ${categoryPath}`);
+      logger.warn(`Directory does not exist: ${absolutePath}`);
       return { success: false, error: 'Directory does not exist' };
     }
-    
+
     // Get list of files and directories
-    const items = await fs.readdir(categoryPath, { withFileTypes: true });
-    
+    const items = await fs.readdir(absolutePath, { withFileTypes: true });
+
     // Filter and form result
     const files = [];
     const directories = [];
-    
+
     for (const item of items) {
-      const itemPath = path.join(categoryPath, item.name);
-      
+      const itemPath = path.join(absolutePath, item.name);
+
       if (item.isDirectory()) {
         directories.push({
           name: item.name,
@@ -146,7 +163,7 @@ export async function getCategoryContents(categoryPath) {
         });
       }
     }
-    
+
     return {
       success: true,
       data: {

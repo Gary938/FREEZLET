@@ -47,14 +47,16 @@
 
 ## Why FREEZLET?
 
-| Traditional Flashcards | FREEZLET |
-|------------------------|----------|
-| Boring repetition | Gamified learning with Pacman |
-| Static interface | Dynamic AI-generated backgrounds |
-| Limited formats | Supports any subject: languages, math, science, history |
-| No visual progress | Watch Pacman eat ghosts as you learn! |
+**Learning shouldn't feel like a chore.** FREEZLET transforms memorization into an immersive experience:
 
-**FREEZLET transforms memorization into a game.** Each correct answer moves Pacman forward, eating ghosts along the way. Beautiful backgrounds change as you progress, making learning feel like an adventure rather than a chore.
+| Traditional Apps | FREEZLET |
+|------------------|----------|
+| Static white screens | Dynamic AI-generated backgrounds |
+| Silent repetition | Visual feedback & animations |
+| Boring progress bars | Gamified progress indicators |
+| One learning mode | Multiple modes: Learn, Test, Write |
+
+Every element is designed to keep you engaged — changing backgrounds tell a visual story, animated feedback rewards your progress, and gamification makes each session feel like play rather than study.
 
 ---
 

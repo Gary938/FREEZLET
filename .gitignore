@@ -28,6 +28,14 @@ Thumbs.db
 *.swp
 *.swo
 
+# AI Assistants
+.cursor/
+.claude/
+.lingma/
+
+# Personal documentation
+CLAUDE.md
+
 # Environment
 .env
 .env.local

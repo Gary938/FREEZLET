@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Переходим в директорию скрипта
+# Change to script directory
 cd "$(dirname "$0")"
 
-# Цветовые коды для вывода
+# Color codes for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -61,5 +61,5 @@ fi
 
 echo
 echo -e "${CYAN}============================================${NC}"
-echo -e "${YELLOW}Автоматическое закрытие через 2 секунды...${NC}"
+echo -e "${YELLOW}Auto-closing in 2 seconds...${NC}"
 sleep 2

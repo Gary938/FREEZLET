@@ -32,7 +32,9 @@
     "cancel": "Abbrechen",
     "ok": "OK",
     "warning": "Warnung",
-    "attention": "Achtung"
+    "attention": "Achtung",
+    "next": "Weiter",
+    "save": "Speichern"
   },
   "category": {
     "create": "Kategorie erstellen",
@@ -61,7 +63,12 @@
     "renameError": "Fehler beim Umbenennen des Tests",
     "editTitle": "Test bearbeiten",
     "getContentError": "Fehler beim Abrufen des Testinhalts",
-    "updateError": "Fehler beim Aktualisieren des Tests"
+    "updateError": "Fehler beim Aktualisieren des Tests",
+    "createTitle": "Test erstellen",
+    "enterName": "Testname eingeben",
+    "enterContent": "Testinhalt eingeben",
+    "contentPlaceholder": "Fügen Sie Ihren Testinhalt hier ein...\n\nFormat:\nFrage?\nOption 1\nOption 2\n*Richtige Antwort\nOption 4\n\n(Leerzeile zwischen Fragen)",
+    "created": "Test erstellt"
   },
   "learnMode": {
     "correct": "Richtig!",

@@ -32,7 +32,9 @@
     "cancel": "Anuluj",
     "ok": "OK",
     "warning": "Ostrzeżenie",
-    "attention": "Uwaga"
+    "attention": "Uwaga",
+    "next": "Dalej",
+    "save": "Zapisz"
   },
   "category": {
     "create": "Utwórz kategorię",
@@ -61,7 +63,12 @@
     "renameError": "Nie udało się zmienić nazwy testu",
     "editTitle": "Edytuj test",
     "getContentError": "Nie udało się pobrać zawartości testu",
-    "updateError": "Nie udało się zaktualizować testu"
+    "updateError": "Nie udało się zaktualizować testu",
+    "createTitle": "Utwórz test",
+    "enterName": "Wprowadź nazwę testu",
+    "enterContent": "Wprowadź zawartość testu",
+    "contentPlaceholder": "Wklej zawartość testu tutaj...\n\nFormat:\nPytanie?\nOpcja 1\nOpcja 2\n*Poprawna odpowiedź\nOpcja 4\n\n(pusta linia między pytaniami)",
+    "created": "Test utworzony"
   },
   "learnMode": {
     "correct": "Poprawnie!",

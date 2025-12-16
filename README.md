@@ -1,6 +1,11 @@
-# FREEZLET
+<p align="center">
+  <img src="docs/logo.png" alt="FREEZLET" width="400">
+</p>
 
 <p align="center">
+  <img src="https://img.shields.io/github/stars/Gary938/FREEZLET?style=flat-square" alt="Stars">
+  <img src="https://img.shields.io/github/forks/Gary938/FREEZLET?style=flat-square" alt="Forks">
+  <img src="https://img.shields.io/github/issues/Gary938/FREEZLET?style=flat-square" alt="Issues">
   <img src="https://img.shields.io/badge/Electron-28.0.0-47848F?logo=electron&logoColor=white" alt="Electron">
   <img src="https://img.shields.io/badge/SQLite-better--sqlite3-003B57?logo=sqlite&logoColor=white" alt="SQLite">
   <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
@@ -11,6 +16,45 @@
 <p align="center">
   <b>A gamified desktop application for learning and memorizing anything - languages, math, science, history and more - with Pacman-style progress tracking</b>
 </p>
+
+---
+
+## Table of Contents
+
+- [Demo](#demo)
+- [Why FREEZLET?](#why-freezlet)
+- [Screenshots](#screenshots)
+- [Features](#features)
+- [Background System](#background-system)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Architecture](#architecture)
+- [Tech Stack](#tech-stack)
+- [Test File Format](#test-file-format)
+- [Localization](#localization)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
+## Demo
+
+<p align="center">
+  <img src="docs/demo.gif" alt="FREEZLET Demo" width="700">
+</p>
+
+---
+
+## Why FREEZLET?
+
+| Traditional Flashcards | FREEZLET |
+|------------------------|----------|
+| Boring repetition | Gamified learning with Pacman |
+| Static interface | Dynamic AI-generated backgrounds |
+| Limited formats | Supports any subject: languages, math, science, history |
+| No visual progress | Watch Pacman eat ghosts as you learn! |
+
+**FREEZLET transforms memorization into a game.** Each correct answer moves Pacman forward, eating ghosts along the way. Beautiful backgrounds change as you progress, making learning feel like an adventure rather than a chore.
 
 ---
 

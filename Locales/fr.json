@@ -32,7 +32,9 @@
     "cancel": "Annuler",
     "ok": "OK",
     "warning": "Avertissement",
-    "attention": "Attention"
+    "attention": "Attention",
+    "next": "Suivant",
+    "save": "Enregistrer"
   },
   "category": {
     "create": "Créer une catégorie",
@@ -61,7 +63,12 @@
     "renameError": "Échec du renommage du test",
     "editTitle": "Modifier le test",
     "getContentError": "Échec de la récupération du contenu du test",
-    "updateError": "Échec de la mise à jour du test"
+    "updateError": "Échec de la mise à jour du test",
+    "createTitle": "Créer un test",
+    "enterName": "Entrez le nom du test",
+    "enterContent": "Entrez le contenu du test",
+    "contentPlaceholder": "Collez le contenu de votre test ici...\n\nFormat:\nQuestion?\nOption 1\nOption 2\n*Bonne réponse\nOption 4\n\n(ligne vide entre les questions)",
+    "created": "Test créé"
   },
   "learnMode": {
     "correct": "Correct!",

@@ -32,7 +32,9 @@
     "cancel": "Cancel",
     "ok": "OK",
     "warning": "Warning",
-    "attention": "Attention"
+    "attention": "Attention",
+    "next": "Next",
+    "save": "Save"
   },
   "category": {
     "create": "Create Category",
@@ -61,7 +63,12 @@
     "renameError": "Failed to rename test",
     "editTitle": "Edit Test",
     "getContentError": "Failed to get test content",
-    "updateError": "Failed to update test"
+    "updateError": "Failed to update test",
+    "createTitle": "Create Test",
+    "enterName": "Enter test name",
+    "enterContent": "Enter Test Content",
+    "contentPlaceholder": "Paste your test content here...\n\nFormat:\nQuestion?\nOption 1\nOption 2\n*Correct answer\nOption 4\n\n(empty line between questions)",
+    "created": "Test Created"
   },
   "learnMode": {
     "correct": "Correct!",

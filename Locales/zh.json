@@ -32,7 +32,9 @@
     "cancel": "取消",
     "ok": "确定",
     "warning": "警告",
-    "attention": "注意"
+    "attention": "注意",
+    "next": "下一步",
+    "save": "保存"
   },
   "category": {
     "create": "创建分类",
@@ -61,7 +63,12 @@
     "renameError": "重命名测试失败",
     "editTitle": "编辑测试",
     "getContentError": "获取测试内容失败",
-    "updateError": "更新测试失败"
+    "updateError": "更新测试失败",
+    "createTitle": "创建测试",
+    "enterName": "输入测试名称",
+    "enterContent": "输入测试内容",
+    "contentPlaceholder": "在此粘贴您的测试内容...\n\n格式:\n问题?\n选项1\n选项2\n*正确答案\n选项4\n\n(问题之间空一行)",
+    "created": "测试已创建"
   },
   "learnMode": {
     "correct": "正确！",

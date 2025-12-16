@@ -32,7 +32,9 @@
     "cancel": "Cancelar",
     "ok": "OK",
     "warning": "Advertencia",
-    "attention": "Atención"
+    "attention": "Atención",
+    "next": "Siguiente",
+    "save": "Guardar"
   },
   "category": {
     "create": "Crear categoría",
@@ -61,7 +63,12 @@
     "renameError": "Error al renombrar la prueba",
     "editTitle": "Editar prueba",
     "getContentError": "Error al obtener el contenido de la prueba",
-    "updateError": "Error al actualizar la prueba"
+    "updateError": "Error al actualizar la prueba",
+    "createTitle": "Crear prueba",
+    "enterName": "Ingrese el nombre de la prueba",
+    "enterContent": "Ingrese el contenido de la prueba",
+    "contentPlaceholder": "Pegue el contenido de su prueba aquí...\n\nFormato:\n¿Pregunta?\nOpción 1\nOpción 2\n*Respuesta correcta\nOpción 4\n\n(línea vacía entre preguntas)",
+    "created": "Prueba creada"
   },
   "learnMode": {
     "correct": "¡Correcto!",

@@ -32,7 +32,9 @@
     "cancel": "Cancelar",
     "ok": "OK",
     "warning": "Aviso",
-    "attention": "Atenção"
+    "attention": "Atenção",
+    "next": "Próximo",
+    "save": "Salvar"
   },
   "category": {
     "create": "Criar categoria",
@@ -61,7 +63,12 @@
     "renameError": "Falha ao renomear o teste",
     "editTitle": "Editar teste",
     "getContentError": "Falha ao obter o conteúdo do teste",
-    "updateError": "Falha ao atualizar o teste"
+    "updateError": "Falha ao atualizar o teste",
+    "createTitle": "Criar teste",
+    "enterName": "Digite o nome do teste",
+    "enterContent": "Digite o conteúdo do teste",
+    "contentPlaceholder": "Cole o conteúdo do seu teste aqui...\n\nFormato:\nPergunta?\nOpção 1\nOpção 2\n*Resposta correta\nOpção 4\n\n(linha vazia entre perguntas)",
+    "created": "Teste criado"
   },
   "learnMode": {
     "correct": "Correto!",

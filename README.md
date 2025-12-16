@@ -18,14 +18,18 @@
 
 ### Main Menu
 ![Main Menu](docs/screenshots/main-menu.png)
-*Category tree navigation, test management, and progress tracking*
+*Category tree navigation and test management*
+
+### Test Table
+![Test Table](docs/screenshots/test-table.png)
+*Test list with progress tracking - stars, accuracy, questions count and attempts*
 
 ### Learning Mode
 ![Learning Mode](docs/screenshots/learn-mode-1.png)
-*Interactive quiz with beautiful AI-generated backgrounds and Pacman ghost progress indicator*
+*Interactive quiz with background settings menu (Story/Random/Load/My Backgrounds)*
 
 ![Learning Mode Alternative](docs/screenshots/learn-mode-2.png)
-*Dynamic backgrounds change as you progress through the test*
+*Dynamic AI-generated backgrounds and Pacman ghost progress indicator*
 
 ### Write Mode
 ![Write Mode](docs/screenshots/write-mode.png)

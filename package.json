@@ -1,6 +1,25 @@
 {
   "name": "quiz-application",
   "version": "1.0.0",
+  "description": "Desktop quiz application with gamified learning mode built on Electron",
+  "license": "MIT",
+  "author": "Gary938",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gary938/FREEZLET.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Gary938/FREEZLET/issues"
+  },
+  "homepage": "https://github.com/Gary938/FREEZLET#readme",
+  "keywords": [
+    "electron",
+    "quiz",
+    "learning",
+    "education",
+    "flashcards",
+    "desktop-app"
+  ],
   "type": "module",
   "main": "Main/mainHub.js",
   "scripts": {

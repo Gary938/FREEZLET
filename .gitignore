@@ -36,6 +36,12 @@ Thumbs.db
 # Personal documentation
 CLAUDE.md
 
+# Internal documentation (keep only root README.md and docs/screenshots/)
+Main/BusinessLayer/LearnMode/doc/
+Main/Logger/README.md
+Main/Main/README.md
+UI/LearnMode/Doc/
+
 # Environment
 .env
 .env.local

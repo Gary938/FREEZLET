@@ -152,7 +152,6 @@ FREEZLET/
 |------------|---------|
 | [Electron 28](https://www.electronjs.org/) | Desktop application framework |
 | [better-sqlite3](https://github.com/WiseLibs/better-sqlite3) | SQLite database |
-| [Pixi.js](https://pixijs.com/) | 2D WebGL rendering |
 | [i18next](https://www.i18next.com/) | Internationalization |
 | [Webpack 5](https://webpack.js.org/) | Module bundling |
 | [Babel](https://babeljs.io/) | JavaScript transpilation |

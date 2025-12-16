@@ -38,7 +38,7 @@
 - **Learning Mode** - Gamified learning with Pacman-style progress visualization
 - **Test Mode** - Traditional quiz format for self-assessment
 - **Write Mode** - Practice spelling by typing answers
-- **8 Languages** - Interface available in EN, DE, ES, FR, PT, UK, ZH, RU
+- **8 Languages** - Interface available in EN, DE, ES, FR, PT, UK, ZH, PL
 - **Progress Tracking** - SQLite database stores your learning history
 - **Custom Backgrounds** - Upload your own images or use story/random modes
 - **Category Organization** - Hierarchical folder structure for tests
@@ -202,7 +202,7 @@ FREEZLET supports 8 languages:
 | `pt` | Portuguese |
 | `uk` | Ukrainian |
 | `zh` | Chinese |
-| `ru` | Russian |
+| `pl` | Polish |
 
 Switch language using the dropdown in the top-right corner.
 

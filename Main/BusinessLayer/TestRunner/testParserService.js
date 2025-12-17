@@ -59,7 +59,7 @@ export function parseTestContent(content) {
           correctAnswer = options.length;
           options.push(line.slice(1).trim());
         } else {
-          // Игнорировать строки с примерами (Example:)
+          // Ignore lines with examples (Example:)
           if (line.startsWith('Example:') || line.startsWith('example:')) {
             return;
           }

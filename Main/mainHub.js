@@ -15,7 +15,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const isDev = !app.isPackaged;
 
-// Полное отключение Vulkan и WebGPU (Dawn на Linux использует Vulkan как backend)
+// Completely disable Vulkan and WebGPU (Dawn on Linux uses Vulkan as backend)
 app.commandLine.appendSwitch('disable-vulkan');
 app.commandLine.appendSwitch('disable-features', 'Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,WebGPU');
 

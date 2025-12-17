@@ -305,7 +305,7 @@ body {
   transform: translateY(-3px) scale(1.05);
 }
 
-/* Create Test - Purple/Violet (связан с Prompt Builder workflow) */
+/* Create Test - Purple/Violet (related to Prompt Builder workflow) */
 #createTestBtn {
   background: linear-gradient(180deg, #3d2a4d 0%, #2a1a33 100%);
   border-color: #9966cc;

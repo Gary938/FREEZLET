@@ -59,7 +59,7 @@ export const UI_TIMINGS = {
     TRANSITION_DELAY: 500,          // Delay between block transitions
     LOADING_MIN_TIME: 300,          // Minimum loading display time
     ERROR_DISPLAY_TIME: 5000,       // Error display time
-    EXAMPLE_DISPLAY_TIME: 3000,     // Example display time
+    EXAMPLE_DISPLAY_TIME: 1700,     // Example display time
     ANIMATION_DELAY: 100            // Delay for CSS animations
 };
 

@@ -10,6 +10,7 @@ import {
 import { generatePrompt } from '../../../Controllers/PromptBuilder/promptGeneratorService.js';
 
 let currentOverlay = null;
+let currentOnClose = null;
 
 /**
  * Attaches all event handlers to the modal
@@ -18,6 +19,7 @@ let currentOverlay = null;
  */
 export function attachHandlers(overlay, onClose) {
   currentOverlay = overlay;
+  currentOnClose = onClose;
 
   // Close button
   const closeBtn = overlay.querySelector('#pbCloseBtn');
@@ -139,6 +141,11 @@ async function handleCopyClick() {
     document.execCommand('copy');
     showCopiedState();
   }
+
+  // Close modal after showing "Copied" state
+  setTimeout(() => {
+    handleClose(currentOnClose);
+  }, 500);
 }
 
 /**
@@ -160,4 +167,5 @@ function handleClose(onClose) {
  */
 export function detachHandlers() {
   currentOverlay = null;
+  currentOnClose = null;
 }

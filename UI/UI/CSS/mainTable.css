@@ -747,13 +747,15 @@ body {
   transform: translateX(3px);
 }
 
-/* Active category */
+/* Active category - dynamic color from background */
 #categories .category-btn.active {
-  background: linear-gradient(180deg, #2a4d3a 0%, #1a3d2a 100%);
-  border-color: #00FF88;
+  background: linear-gradient(180deg, #1d1d25 0%, #12121a 100%);
+  border: 3px solid var(--ui-text-color);
+  color: var(--ui-text-color);
+  text-shadow: 0 0 8px currentColor;
   box-shadow:
-    0 0 15px rgba(0, 255, 136, 0.5),
-    inset 0 0 20px rgba(0, 255, 136, 0.1);
+    0 0 18px currentColor,
+    inset 0 0 20px rgba(255, 255, 255, 0.05);
 }
 
 /* Folder icon - shimmer */
@@ -842,14 +844,16 @@ body {
   background: linear-gradient(180deg, #1a3d2a 0%, #0d2a1a 100%);
 }
 
-/* Active subcategory - full green border */
+/* Active subcategory - dynamic color from background */
 #categories .category-btn.visible-node.active {
-  border: 2px solid #00FF88;
-  border-left: 3px solid #00CC66;
-  background: linear-gradient(180deg, #1a3d2a 0%, #0d2a1a 100%);
+  border: 3px solid var(--ui-text-color);
+  border-left: 4px solid var(--ui-text-color);
+  background: linear-gradient(180deg, #1d1d25 0%, #12121a 100%);
+  color: var(--ui-text-color);
+  text-shadow: 0 0 8px currentColor;
   box-shadow:
-    0 0 12px rgba(0, 255, 136, 0.4),
-    inset 0 0 15px rgba(0, 255, 136, 0.1);
+    0 0 15px currentColor,
+    inset 0 0 15px rgba(255, 255, 255, 0.05);
 }
 
 /* Child element appearance animation */

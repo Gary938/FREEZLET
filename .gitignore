@@ -15,8 +15,9 @@ release/
 # Backups
 backup/
 
-# Database (user data)
+# Database (user data) - ignore everywhere except Progress/ folder
 structure.db
+!Progress/structure.db
 
 # OS files
 .DS_Store

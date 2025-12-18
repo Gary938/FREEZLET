@@ -71,8 +71,9 @@ const clearAllLogs = () => {
   }
 };
 
-clearAllLogs();
-mainLogger.info('System', 'Log files cleared on startup');
+// DEBUG: Disable log clearing for production debugging
+// clearAllLogs();
+// mainLogger.info('System', 'Log files cleared on startup');
 
 // Log startup information
 mainLogger.info('Main', 'Application starting...');

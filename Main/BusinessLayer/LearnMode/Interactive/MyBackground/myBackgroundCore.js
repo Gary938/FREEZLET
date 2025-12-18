@@ -7,7 +7,7 @@ import { scanMyBackgrounds, ensureFolderExists, deleteImageFile } from './Utils/
 import { saveMyBackgroundState, loadMyBackgroundState } from './DB/myBackgroundState.js';
 import { promises as fs } from 'fs';
 import path from 'path';
-import { dialog } from 'electron';
+import { dialog, app } from 'electron';
 import { getBasePath } from '../../../../Utils/appPaths.js';
 
 // OPERATIONS
@@ -31,8 +31,14 @@ export const loadMyBackground = async (browserWindow) => {
 
             try {
                 await fs.copyFile(sourcePath, destPath);
-                const relativePath = path.relative(getBasePath(), destPath).replace(/\\/g, '/');
-                results.uploaded.push({ fileName, relativePath });
+
+                // In production: use file:// protocol for userData paths
+                // In dev: use relative path
+                const backgroundPath = app.isPackaged
+                    ? 'file:///' + destPath.replace(/\\/g, '/')
+                    : path.relative(getBasePath(), destPath).replace(/\\/g, '/');
+
+                results.uploaded.push({ fileName, relativePath: backgroundPath });
             } catch (error) {
                 results.failed.push({ fileName, error: error.message });
             }
@@ -90,8 +96,8 @@ export const selectMyBackground = async (imagePath) => {
 
     try {
         // Handle file:// protocol paths (production) vs relative paths (dev)
-        const absolutePath = imagePath.startsWith('file://')
-            ? imagePath.replace('file://', '')
+        const absolutePath = imagePath.startsWith('file:///')
+            ? imagePath.replace('file:///', '')
             : path.join(getBasePath(), imagePath);
         await fs.access(absolutePath);
     } catch {

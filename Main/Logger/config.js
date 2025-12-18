@@ -50,7 +50,7 @@ export const DEFAULT_CONFIG = {
   logToFile: true,  // Always write to logs/app.log for error diagnostics
   logToCMD: !isProduction,
   logToDevTools: !isProduction,
-  minLogLevel: isProduction ? 'error' : 'trace',
+  minLogLevel: 'trace',  // Always trace for debugging (production & dev)
 
   // Formatting
   colorize: true,

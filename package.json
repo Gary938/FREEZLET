@@ -95,7 +95,8 @@
         "from": "Progress",
         "to": "Progress",
         "filter": [
-          "**/*"
+          "**/*",
+          "**/*.db"
         ]
       },
       {

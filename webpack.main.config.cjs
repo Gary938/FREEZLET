@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'development', // для быстрой проверки
+  mode: 'production',
   target: 'electron-main',
   entry: './Main/mainHub.js',
   output: {

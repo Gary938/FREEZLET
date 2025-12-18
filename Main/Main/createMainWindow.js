@@ -27,6 +27,7 @@ export function createMainWindow(isDev = false) {
       webPreferences: {
         nodeIntegration: false,
         contextIsolation: true,
+        sandbox: true,
         preload: path.join(__dirname, '../../dist/preload.bundle.js')
       }
     });

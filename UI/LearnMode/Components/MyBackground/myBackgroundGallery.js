@@ -2,6 +2,7 @@
 
 // IMPORTS
 import { createUITracer } from '../../Utils/uiTracer.js';
+import { escapeCSSUrl } from '../../Utils/domValidator.js';
 import { createMyBackgroundBridge } from './myBackgroundBridge.js';
 
 // CONFIG
@@ -97,12 +98,12 @@ export const createMyBackgroundGallery = (images, onSelectCallback, settings = {
             const enabled = e.target.checked;
             tracer.trace('randomMode:change', { enabled });
 
-            try {
-                await window.electron.learnMode.setMyBackgroundRandomMode(enabled);
+            const result = await bridge.setMyBackgroundRandomMode(enabled);
+            if (result.success) {
                 currentRandomMode = enabled;
                 tracer.trace('randomMode:saved', { enabled });
-            } catch (error) {
-                tracer.trace('randomMode:error', { error: error.message });
+            } else {
+                tracer.trace('randomMode:error', { error: result.error });
                 e.target.checked = currentRandomMode;
             }
         });
@@ -180,7 +181,7 @@ export const createMyBackgroundGallery = (images, onSelectCallback, settings = {
             currentImages.forEach(imagePath => {
                 const item = document.createElement('div');
                 item.className = GALLERY_CONFIG.CSS_CLASSES.ITEM;
-                item.style.backgroundImage = `url('${imagePath}')`;
+                item.style.backgroundImage = `url('${escapeCSSUrl(imagePath)}')`;
                 item.dataset.path = imagePath;
 
                 if (selectedImages.has(imagePath)) {

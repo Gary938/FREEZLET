@@ -22,11 +22,16 @@ export async function renameCategory(oldName, newName) {
   try {
     logApiStart(logger, 'renameCategory', { oldName, newName });
     
+    // Check for path traversal in full path
+    if (newName.includes('..') || oldName.includes('..')) {
+      return { success: false, error: 'Invalid category name: contains ".."' };
+    }
+
     // Extract only category name from full path for validation
-    const newNameOnly = newName.includes('/') ? 
+    const newNameOnly = newName.includes('/') ?
       newName.split('/').pop() : // Take only last part of path
       newName;
-    
+
     // 1. Validate new category name (name only, no path)
     if (!isValidCategoryName(newNameOnly)) {
       return { success: false, error: `Invalid category name: ${newNameOnly}` };

@@ -21,6 +21,7 @@ export {
     validateDOMStructure,
     validateElementExists,
     waitForElement,
+    escapeCSSUrl,
     VALIDATION_CONFIG
 } from './domValidator.js';
 
@@ -71,6 +72,7 @@ export const createUtilsAPI = () => ({
     validateDOM: validateDOMStructure,
     validateElement: validateElementExists,
     waitForElement,
+    escapeCSSUrl,
     
     // Facade Validator API
     validateStartParams,

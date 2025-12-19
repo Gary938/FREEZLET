@@ -7,12 +7,28 @@ import path from 'path';
 import { mainLogger } from '../../loggerHub.js';
 import { getBasePath } from '../../Utils/appPaths.js';
 
-// Helper: convert relative path to absolute
+// Helper: convert relative path to absolute with security checks
 const toAbsolutePath = (relativePath) => {
+  // Reject absolute paths for security
   if (path.isAbsolute(relativePath)) {
-    return relativePath;
+    throw new Error('Absolute paths are not allowed');
   }
-  return path.join(getBasePath(), relativePath);
+
+  // Check for path traversal before joining
+  if (relativePath.includes('..')) {
+    throw new Error('Path traversal detected: contains ".."');
+  }
+
+  const basePath = getBasePath();
+  const absolutePath = path.join(basePath, relativePath);
+
+  // Additional check: ensure path stays within base directory after normalization
+  const normalizedPath = path.normalize(absolutePath);
+  if (!normalizedPath.startsWith(basePath)) {
+    throw new Error('Path traversal detected');
+  }
+
+  return normalizedPath;
 };
 
 // Logger for module

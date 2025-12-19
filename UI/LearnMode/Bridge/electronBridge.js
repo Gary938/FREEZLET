@@ -6,9 +6,7 @@ import { createTimeoutPromise } from '../Utils/timeoutHelpers.js';
 
 // CONFIG
 export const BRIDGE_CONFIG = {
-    API_TIMEOUT: 10000,          // Timeout for API calls
-    RETRY_ATTEMPTS: 3,           // Number of retry attempts on error
-    RETRY_DELAY: 1000           // Delay between retry attempts
+    API_TIMEOUT: 10000           // Timeout for API calls
 };
 
 // OPERATIONS

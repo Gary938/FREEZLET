@@ -5,6 +5,8 @@
 
 import { handleCreateCategoryClick } from '../../../Controllers/Category/categoryCreateController.js';
 import { createLogger } from '../../../Utils/loggerService.js';
+import { modalService } from '../../../Controllers/Modal/modalService.js';
+import { t } from '../../../i18n/index.js';
 
 // Create logger for module
 const logger = createLogger('UI/Components/CreateCategory');
@@ -54,7 +56,7 @@ export class CreateCategoryButton {
 
         if (!result.success && !result.canceled) {
           // Show error to user if operation was not cancelled
-          alert(`Error: ${result.error}`);
+          await modalService.alert(result.error, t('error.title'));
         }
       });
 

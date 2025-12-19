@@ -68,7 +68,10 @@
     "enterName": "Testname eingeben",
     "enterContent": "Testinhalt eingeben",
     "contentPlaceholder": "Fügen Sie Ihren Testinhalt hier ein...\n\nFormat:\nFrage?\nOption 1\nOption 2\n*Richtige Antwort\nOption 4\n\n(Leerzeile zwischen Fragen)",
-    "created": "Test erstellt"
+    "created": "Test erstellt",
+    "restartPathError": "Test konnte nicht neu gestartet werden: Testpfad nicht gefunden",
+    "restartError": "Fehler beim Neustart des Tests",
+    "startFailed": "Test konnte nicht gestartet werden"
   },
   "learnMode": {
     "correct": "Richtig!",

@@ -74,12 +74,18 @@ const createElementWaiter = (selector, timeout) => {
                 resolve(createValidationSuccess({ element }));
             }
         });
-        
+
         observer.observe(document.body, { childList: true, subtree: true });
-        
+
         setTimeout(() => {
             observer.disconnect();
             resolve(createValidationError('ELEMENT_TIMEOUT', selector));
         }, timeout);
     });
+};
+
+// HELPERS - CSS Security
+export const escapeCSSUrl = (url) => {
+    if (!url || typeof url !== 'string') return '';
+    return url.replace(/['"\(\)\\]/g, '\\$&');
 }; 

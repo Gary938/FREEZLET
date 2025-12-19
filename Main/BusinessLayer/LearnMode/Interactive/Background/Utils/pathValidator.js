@@ -5,6 +5,7 @@ import { BACKGROUND_CONFIG } from '../Config/backgroundConfig.js';
 import { trace } from '../../../Utils/tracer.js';
 import fs from 'fs';
 import { promises as fsPromises } from 'fs';
+import path from 'path';
 
 // OPERATIONS
 export const validateMode = (mode) => {
@@ -30,6 +31,12 @@ export const validatePath = (filePath) => {
 
     if (typeof filePath !== 'string') {
         return createErrorResult('Path must be a string', 'INVALID_PATH_TYPE');
+    }
+
+    // Check for path traversal attempts
+    const normalized = path.normalize(filePath);
+    if (normalized.includes('..')) {
+        return createErrorResult('Invalid path: traversal not allowed', 'PATH_TRAVERSAL');
     }
 
     return createSuccessResult({ filePath });

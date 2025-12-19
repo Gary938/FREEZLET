@@ -36,6 +36,7 @@ Thumbs.db
 
 # Personal documentation
 CLAUDE.md
+AUDIT_PLAN.md
 
 # Internal documentation (keep only root README.md and docs/screenshots/)
 Main/BusinessLayer/LearnMode/doc/

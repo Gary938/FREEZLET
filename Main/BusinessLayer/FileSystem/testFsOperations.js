@@ -16,6 +16,24 @@ const logger = {
 };
 
 /**
+ * Validates path for path traversal attacks
+ * @param {string} filePath - Path to validate
+ * @returns {{valid: boolean, error?: string}} - Validation result
+ */
+function validatePath(filePath) {
+  if (!filePath || typeof filePath !== 'string') {
+    return { valid: false, error: 'Path is empty or invalid' };
+  }
+
+  // Check for path traversal
+  if (filePath.includes('..')) {
+    return { valid: false, error: 'Path traversal detected: contains ".."' };
+  }
+
+  return { valid: true };
+}
+
+/**
  * Checks test existence in file system
  * @param {string} testPath - Full path to test file
  * @returns {Promise<{success: boolean, exists: boolean, error?: string}>} - Check result
@@ -374,17 +392,27 @@ export async function uploadTestFile(sourcePath, destinationPath) {
   try {
     if (!sourcePath) {
       logger.warn('Source file path for upload not specified');
-      return { 
-        success: false, 
+      return {
+        success: false,
         error: 'Source file path for upload not specified'
       };
     }
 
     if (!destinationPath) {
       logger.warn('Destination path for test upload not specified');
-      return { 
-        success: false, 
+      return {
+        success: false,
         error: 'Destination path for test upload not specified'
+      };
+    }
+
+    // Validate destination path for path traversal
+    const destValidation = validatePath(destinationPath);
+    if (!destValidation.valid) {
+      logger.warn(`Invalid destination path: ${destValidation.error}`);
+      return {
+        success: false,
+        error: destValidation.error
       };
     }
 
@@ -454,6 +482,25 @@ export async function renameTestFile(oldPath, newPath) {
       return {
         success: false,
         error: 'New path for rename not specified'
+      };
+    }
+
+    // Validate paths for path traversal
+    const oldPathValidation = validatePath(oldPath);
+    if (!oldPathValidation.valid) {
+      logger.warn(`Invalid old path: ${oldPathValidation.error}`);
+      return {
+        success: false,
+        error: oldPathValidation.error
+      };
+    }
+
+    const newPathValidation = validatePath(newPath);
+    if (!newPathValidation.valid) {
+      logger.warn(`Invalid new path: ${newPathValidation.error}`);
+      return {
+        success: false,
+        error: newPathValidation.error
       };
     }
 

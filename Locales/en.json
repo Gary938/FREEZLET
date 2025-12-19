@@ -68,7 +68,10 @@
     "enterName": "Enter test name",
     "enterContent": "Enter Test Content",
     "contentPlaceholder": "Paste your test content here...\n\nFormat:\nQuestion?\nOption 1\nOption 2\n*Correct answer\nOption 4\n\n(empty line between questions)",
-    "created": "Test Created"
+    "created": "Test Created",
+    "restartPathError": "Failed to restart test: test path not found",
+    "restartError": "Error occurred while restarting test",
+    "startFailed": "Failed to start test"
   },
   "learnMode": {
     "correct": "Correct!",

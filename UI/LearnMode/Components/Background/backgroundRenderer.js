@@ -2,6 +2,7 @@
 
 // IMPORTS
 import { createUITracer } from '../../Utils/uiTracer.js';
+import { escapeCSSUrl } from '../../Utils/domValidator.js';
 
 // CONFIG
 export const BACKGROUND_RENDERER_CONFIG = {
@@ -103,7 +104,7 @@ const applyWithTransition = (element, imagePath) => {
         
         // Instant style setup WITHOUT transition
         Object.assign(element.style, {
-            backgroundImage: `url("${imagePath}")`,
+            backgroundImage: `url("${escapeCSSUrl(imagePath)}")`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center center",
             backgroundAttachment: "fixed",

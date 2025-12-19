@@ -68,7 +68,10 @@
     "enterName": "Ingrese el nombre de la prueba",
     "enterContent": "Ingrese el contenido de la prueba",
     "contentPlaceholder": "Pegue el contenido de su prueba aquí...\n\nFormato:\n¿Pregunta?\nOpción 1\nOpción 2\n*Respuesta correcta\nOpción 4\n\n(línea vacía entre preguntas)",
-    "created": "Prueba creada"
+    "created": "Prueba creada",
+    "restartPathError": "No se pudo reiniciar la prueba: ruta de prueba no encontrada",
+    "restartError": "Error al reiniciar la prueba",
+    "startFailed": "No se pudo iniciar la prueba"
   },
   "learnMode": {
     "correct": "¡Correcto!",

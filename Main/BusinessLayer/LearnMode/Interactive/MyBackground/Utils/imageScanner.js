@@ -93,6 +93,48 @@ const isImageFile = (filename) => {
     return MY_BACKGROUND_CONFIG.SUPPORTED_EXTENSIONS.includes(ext);
 };
 
+// Magic bytes for image formats
+const IMAGE_SIGNATURES = {
+    jpg: [0xFF, 0xD8, 0xFF],
+    png: [0x89, 0x50, 0x4E, 0x47],
+    gif: [0x47, 0x49, 0x46, 0x38],
+    webp: [0x52, 0x49, 0x46, 0x46], // RIFF header (WebP starts with RIFF)
+    bmp: [0x42, 0x4D]
+};
+
+// Validate image file by checking magic bytes
+export const validateImageContent = async (filePath) => {
+    trace('MyBackground:validateImageContent', { filePath });
+
+    try {
+        const fileHandle = await fs.open(filePath, 'r');
+        const buffer = Buffer.alloc(12);
+        await fileHandle.read(buffer, 0, 12, 0);
+        await fileHandle.close();
+
+        // Check each signature
+        for (const [format, signature] of Object.entries(IMAGE_SIGNATURES)) {
+            const matches = signature.every((byte, index) => buffer[index] === byte);
+            if (matches) {
+                // WebP needs additional check for 'WEBP' at offset 8
+                if (format === 'webp') {
+                    const webpMarker = buffer.slice(8, 12).toString('ascii');
+                    if (webpMarker === 'WEBP') {
+                        return createSuccessResult({ valid: true, format: 'webp' });
+                    }
+                } else {
+                    return createSuccessResult({ valid: true, format });
+                }
+            }
+        }
+
+        return createSuccessResult({ valid: false, format: null });
+    } catch (error) {
+        mainLogger.error('MyBackground', 'Error validating image content', { error: error.message, filePath });
+        return createErrorResult(error.message, 'VALIDATION_ERROR');
+    }
+};
+
 export const deleteImageFile = async (imagePath) => {
     trace('MyBackground:deleteImageFile', { imagePath });
 

@@ -50,7 +50,6 @@ export async function initUIControllers() {
     return true;
   } catch (error) {
     logger.error('UI controllers initialization error', error);
-    console.error('UI controllers initialization error:', error);
 
     // Dispatch initialization error event
     uiEventDispatcher.dispatch(uiEventDispatcher.events.UI_INITIALIZED, {

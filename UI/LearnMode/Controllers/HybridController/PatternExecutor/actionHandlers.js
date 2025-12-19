@@ -9,8 +9,15 @@ export const handleRestartAction = async (actionType, tracer) => {
         [UI_ACTION_TYPES.TRY_AGAIN]: { reason: 'try_again', action: 'try_again' },
         [UI_ACTION_TYPES.NEXT_STAGE]: { reason: 'next_stage', action: 'next_stage' }
     };
-    
+
     const eventData = eventMap[actionType];
+
+    // Guard clause - check for unknown action type
+    if (!eventData) {
+        tracer.trace('handleRestartAction:error', { error: 'UNKNOWN_ACTION_TYPE', actionType });
+        return createActionResult(false, null, null, { error: 'UNKNOWN_ACTION_TYPE' });
+    }
+
     dispatchLearnModeEvent('hybrid:LEARN_MODE_RESTART', eventData);
     return createActionResult(true, null, null, { action: eventData.action });
 };

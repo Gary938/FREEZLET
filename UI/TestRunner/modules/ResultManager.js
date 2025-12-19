@@ -3,6 +3,7 @@ import { uiEventDispatcher } from '@UI/Controllers/uiEventDispatcher.js';
 import { getTestState } from '../testState.js';
 import { closeTestRunner } from '../testState.js';
 import { t } from '@UI/i18n/index.js';
+import { ModalController } from '@UI/Controllers/Modal/modalController.js';
 
 // Create logger for module
 const logger = createLogger('UI/TestRunner/modules/ResultManager');
@@ -126,7 +127,7 @@ export class ResultManager {
                 
                 if (!testPath) {
                     logger.error('Error: test path not found in state');
-                    alert('Failed to restart test: test path not found');
+                    ModalController.showNotification(t('error.title'), t('test.restartPathError'));
                     return;
                 }
                 
@@ -150,7 +151,7 @@ export class ResultManager {
                 }, 100);
             } catch (error) {
                 logger.error(`Error restarting test: ${error.message}`, error);
-                alert('Error occurred while restarting test');
+                ModalController.showError(t('error.title'), t('test.restartError'));
             }
         });
 

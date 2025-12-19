@@ -52,7 +52,7 @@
     "babel-loader": "^10.0.0",
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.1",
-    "electron": "^28.0.0",
+    "electron": "^35.7.5",
     "electron-builder": "^24.13.3",
     "electron-rebuild": "^3.2.9",
     "node-polyfill-webpack-plugin": "^4.1.0",

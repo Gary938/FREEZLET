@@ -14,6 +14,12 @@ export const categoryCreateBridge = {
    * @returns {Promise<{success: boolean, path?: string, error?: string}>}
    */
   async createCategory(categoryName) {
+    // Validate parameter
+    if (!categoryName || typeof categoryName !== 'string' || categoryName.trim() === '') {
+      logger.warn('Invalid category name: empty or not a string');
+      return { success: false, error: 'Invalid category name' };
+    }
+
     try {
       logger.info(`Sending request to create category: ${categoryName}`);
 
@@ -47,6 +53,16 @@ export const categoryCreateBridge = {
    * @returns {Promise<{success: boolean, path?: string, error?: string}>}
    */
   async createSubcategory(parentCategory, subcategoryName) {
+    // Validate parameters
+    if (!parentCategory || typeof parentCategory !== 'string' || parentCategory.trim() === '') {
+      logger.warn('Invalid parent category: empty or not a string');
+      return { success: false, error: 'Invalid parent category' };
+    }
+    if (!subcategoryName || typeof subcategoryName !== 'string' || subcategoryName.trim() === '') {
+      logger.warn('Invalid subcategory name: empty or not a string');
+      return { success: false, error: 'Invalid subcategory name' };
+    }
+
     try {
       logger.info(`Sending request to create subcategory: ${subcategoryName} in ${parentCategory}`);
 

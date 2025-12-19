@@ -14,6 +14,12 @@ export const categoryDeleteBridge = {
    * @returns {Promise<{success: boolean, error?: string}>}
    */
   async deleteCategory(categoryPath) {
+    // Validate parameter
+    if (!categoryPath || typeof categoryPath !== 'string' || categoryPath.trim() === '') {
+      logger.warn('Invalid category path: empty or not a string');
+      return { success: false, error: 'Invalid category path' };
+    }
+
     try {
       logger.info(`Sending request to delete category: ${categoryPath}`);
 

@@ -3,7 +3,7 @@
 import { createSuccessResult, createErrorResult } from '../../Core/errorHandler.js';
 import { trace } from '../../Utils/tracer.js';
 import { MY_BACKGROUND_CONFIG, DIALOG_OPTIONS } from './Config/myBackgroundConfig.js';
-import { scanMyBackgrounds, ensureFolderExists, deleteImageFile } from './Utils/imageScanner.js';
+import { scanMyBackgrounds, ensureFolderExists, deleteImageFile, validateImageContent } from './Utils/imageScanner.js';
 import { saveMyBackgroundState, loadMyBackgroundState } from './DB/myBackgroundState.js';
 import { promises as fs } from 'fs';
 import path from 'path';
@@ -30,6 +30,13 @@ export const loadMyBackground = async (browserWindow) => {
             const destPath = path.join(MY_BACKGROUND_CONFIG.FOLDER_PATH, fileName);
 
             try {
+                // Validate image content before copying
+                const validation = await validateImageContent(sourcePath);
+                if (!validation.success || !validation.data.valid) {
+                    results.failed.push({ fileName, error: 'Invalid image format' });
+                    continue;
+                }
+
                 await fs.copyFile(sourcePath, destPath);
 
                 // In production: use file:// protocol for userData paths

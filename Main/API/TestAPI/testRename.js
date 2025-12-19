@@ -32,6 +32,12 @@ export async function renameTest(testPath, newName) {
       return { success: false, error: 'New name not specified' };
     }
 
+    // Check for path traversal attempts
+    if (testPath.includes('..')) {
+      logApiError(logger, 'renameTest', new Error('Invalid path: contains ".."'));
+      return { success: false, error: 'Invalid path' };
+    }
+
     // 2. Sanitize new name and add .txt extension if needed
     let sanitizedName = newName.trim();
     if (!sanitizedName.endsWith('.txt')) {

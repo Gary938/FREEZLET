@@ -15,6 +15,16 @@ export const categoryRenameBridge = {
    * @returns {Promise<{success: boolean, error?: string}>}
    */
   async renameCategory(categoryPath, newName) {
+    // Validate parameters
+    if (!categoryPath || typeof categoryPath !== 'string' || categoryPath.trim() === '') {
+      logger.warn('Invalid category path: empty or not a string');
+      return { success: false, error: 'Invalid category path' };
+    }
+    if (!newName || typeof newName !== 'string' || newName.trim() === '') {
+      logger.warn('Invalid new name: empty or not a string');
+      return { success: false, error: 'Invalid new name' };
+    }
+
     try {
       logger.info(`Sending request to rename category: ${categoryPath} -> ${newName}`);
 

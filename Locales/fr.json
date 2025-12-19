@@ -68,7 +68,10 @@
     "enterName": "Entrez le nom du test",
     "enterContent": "Entrez le contenu du test",
     "contentPlaceholder": "Collez le contenu de votre test ici...\n\nFormat:\nQuestion?\nOption 1\nOption 2\n*Bonne réponse\nOption 4\n\n(ligne vide entre les questions)",
-    "created": "Test créé"
+    "created": "Test créé",
+    "restartPathError": "Impossible de redémarrer le test: chemin du test non trouvé",
+    "restartError": "Erreur lors du redémarrage du test",
+    "startFailed": "Impossible de démarrer le test"
   },
   "learnMode": {
     "correct": "Correct!",

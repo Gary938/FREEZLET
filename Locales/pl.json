@@ -68,7 +68,10 @@
     "enterName": "Wprowadź nazwę testu",
     "enterContent": "Wprowadź zawartość testu",
     "contentPlaceholder": "Wklej zawartość testu tutaj...\n\nFormat:\nPytanie?\nOpcja 1\nOpcja 2\n*Poprawna odpowiedź\nOpcja 4\n\n(pusta linia między pytaniami)",
-    "created": "Test utworzony"
+    "created": "Test utworzony",
+    "restartPathError": "Nie udało się ponownie uruchomić testu: ścieżka testu nie została znaleziona",
+    "restartError": "Wystąpił błąd podczas ponownego uruchamiania testu",
+    "startFailed": "Nie udało się uruchomić testu"
   },
   "learnMode": {
     "correct": "Poprawnie!",

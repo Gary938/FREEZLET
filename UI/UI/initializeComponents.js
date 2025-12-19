@@ -5,6 +5,8 @@ import { initializeTestTable } from './Components/TestTable/testTableMain.js';
 import { createLogger } from '@UI/Utils/loggerService.js';
 import { uiEventDispatcher } from '@UI/Controllers/uiEventDispatcher.js';
 import { testRunnerController } from '@UI/TestRunner/UIController/testRunnerController.js';
+import { modalService } from '@UI/Controllers/Modal/modalService.js';
+import { t } from '@UI/i18n/index.js';
 
 // Create logger for module
 const logger = createLogger('UI/initializeComponents');
@@ -28,11 +30,11 @@ function initializeTestRunnerListeners() {
         
         if (!result.success) {
           logger.error(`Test runner start error: ${result.error}`);
-          alert(`Failed to start test: ${result.error}`);
+          modalService.alert(`${t('test.startFailed')}: ${result.error}`, t('error.title'));
         }
       } catch (error) {
         logger.error('Error handling test runner start event', error);
-        alert(`Error starting test: ${error.message}`);
+        modalService.alert(`${t('test.startFailed')}: ${error.message}`, t('error.title'));
       }
     }
   );

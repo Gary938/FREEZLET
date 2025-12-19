@@ -8,6 +8,7 @@ import { modalService } from '../Modal/modalService.js';
 import { categoryBridge } from '../../Bridge/Category/index.js';
 import { uiEventDispatcher } from '../uiEventDispatcher.js';
 import { t } from '@UI/i18n/index.js';
+import categorySelectController from './categorySelectController.js';
 
 // Create logger for module
 const logger = createLogger('UI/Controllers/Category/Delete');
@@ -66,6 +67,17 @@ export async function deleteCategory(categoryPath) {
         timestamp: Date.now(),
         source: 'categoryDeleteController'
       });
+
+      // Get adjacent category and select it to update table
+      try {
+        const treeData = await categoryBridge.getCategoryTreeData();
+        if (treeData.success && treeData.currentCategory) {
+          logger.info(`Selecting adjacent category: ${treeData.currentCategory}`);
+          await categorySelectController.handleCategorySelect(treeData.currentCategory);
+        }
+      } catch (selectError) {
+        logger.error('Error selecting adjacent category', selectError);
+      }
     } else {
       // Show error message
       logger.error(`Category deletion error: ${result.error}`);

@@ -93,7 +93,20 @@ export const categoryTreeController = {
   async handleCategoryDeleted(event) {
     try {
       logger.info('Processing category deleted event');
-      await this.refreshCategoryTree();
+
+      // Get tree data with new current category (adjacent to deleted)
+      const treeData = await this.getCategoryTreeData();
+
+      if (treeData.success && treeData.currentCategory) {
+        // Update tree visually
+        await this.refreshCategoryTree();
+
+        // Select the new adjacent category (triggers table update)
+        await this.selectCategory(treeData.currentCategory);
+      } else {
+        // Just refresh tree if no category to select
+        await this.refreshCategoryTree();
+      }
     } catch (error) {
       logger.error('Error processing category deleted event', error);
     }

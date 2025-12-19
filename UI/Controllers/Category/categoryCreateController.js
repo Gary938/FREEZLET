@@ -8,6 +8,7 @@ import { createLogger } from '../../Utils/loggerService.js';
 import { categoryBridge } from '../../Bridge/Category/index.js';
 import { uiEventDispatcher } from '../uiEventDispatcher.js';
 import { t } from '@UI/i18n/index.js';
+import categorySelectController from './categorySelectController.js';
 
 const logger = createLogger('UI/Category/CreateController');
 
@@ -81,6 +82,14 @@ export async function handleCreateCategoryClick() {
         timestamp: Date.now(),
         source: 'categoryCreateController'
       });
+
+      // Auto-select the newly created category
+      try {
+        logger.info(`Auto-selecting new category: ${result.path}`);
+        await categorySelectController.handleCategorySelect(result.path);
+      } catch (selectError) {
+        logger.error('Error selecting new category', selectError);
+      }
     } else {
       // Show error message
       logger.error(`Category creation error: ${result.error}`);
@@ -165,6 +174,14 @@ export async function handleCreateSubcategoryClick(parentCategory) {
         timestamp: Date.now(),
         source: 'categoryCreateController'
       });
+
+      // Auto-select the newly created subcategory
+      try {
+        logger.info(`Auto-selecting new subcategory: ${result.path}`);
+        await categorySelectController.handleCategorySelect(result.path);
+      } catch (selectError) {
+        logger.error('Error selecting new subcategory', selectError);
+      }
     } else {
       // Show error message
       logger.error(`Subcategory creation error: ${result.error}`);

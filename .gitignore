@@ -15,9 +15,11 @@ release/
 # Backups
 backup/
 
-# Database (user data) - ignore everywhere except Progress/ folder
-structure.db
-!Progress/structure.db
+# User data folders (keep only .gitkeep)
+MyBackground/*
+!MyBackground/.gitkeep
+Progress/*
+!Progress/.gitkeep
 
 # OS files
 .DS_Store

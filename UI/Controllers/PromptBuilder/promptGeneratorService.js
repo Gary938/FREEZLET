@@ -72,73 +72,124 @@ function buildPrompt(config) {
     outputType
   } = config;
 
-  // Generate options letters
-  const optionLetters = optionsCount === 4
-    ? 'A, B, C, D'
-    : 'A, B, C, D, E, F';
-
-  // Build the prompt parts
   const parts = [];
 
   // Header
   parts.push(`Create a test on the topic: "${topic}"`);
   parts.push('');
 
+  // Critical rules for less capable AI models
+  parts.push('CRITICAL RULES (READ CAREFULLY):');
+  parts.push('- The * symbol marks the correct answer - put it at the START of the line');
+  parts.push('- Write the ACTUAL ANSWER TEXT after *, not just "correct" or "A"');
+  parts.push('- DO NOT use letters (A, B, C, D) or numbering - just plain text options');
+  parts.push('- Each option is a complete answer text on its own line');
+  parts.push('');
+
   // Format description
   parts.push('TEST FORMAT:');
-  parts.push('The test must be in text format (.txt) with the following structure:');
-  parts.push('');
-  parts.push('1. Each question starts with the question text');
-  parts.push(`2. After the question, there are ${optionsCount} answer options`);
-  parts.push('3. The correct answer is marked with * symbol at the beginning of the line');
-  parts.push('4. After the answer options - an empty line (separator between questions)');
+  parts.push(`- Question text (first line)`);
+  parts.push(`- ${optionsCount} answer options (plain text, no letters/numbers)`);
+  parts.push('- Correct answer marked with * at the beginning');
+  parts.push('- Empty line between questions');
 
   if (includeExamples) {
-    parts.push('5. Before the empty line, add usage examples in the format:');
-    parts.push('   Example: example text');
-    parts.push(`   (add ${examplesCount} example(s) for each question)`);
+    parts.push(`- ${examplesCount} example(s) after options in format: Example: text`);
   }
 
   parts.push('');
 
-  // Structure example
-  parts.push('STRUCTURE EXAMPLE:');
+  // Correct format example with real content
+  parts.push('CORRECT FORMAT EXAMPLE:');
   parts.push('```');
-  parts.push('Question text?');
 
-  // Generate sample options
-  for (let i = 0; i < optionsCount; i++) {
-    const letter = String.fromCharCode(65 + i); // A, B, C, D, E, F
-    if (i === 2) {
-      parts.push(`*Option ${letter} (correct answer)`);
-    } else {
-      parts.push(`Option ${letter}`);
-    }
+  // First question - simple without examples
+  parts.push('What is the capital of France?');
+  if (optionsCount === 4) {
+    parts.push('Berlin');
+    parts.push('Madrid');
+    parts.push('*Paris');
+    parts.push('Rome');
+  } else {
+    parts.push('Berlin');
+    parts.push('Madrid');
+    parts.push('*Paris');
+    parts.push('Rome');
+    parts.push('Warsaw');
+    parts.push('Vienna');
   }
 
   if (includeExamples) {
     for (let i = 1; i <= examplesCount; i++) {
-      parts.push(`Example: Usage example ${i}`);
+      parts.push(`Example: Paris is the largest city in France`);
     }
   }
 
   parts.push('');
-  parts.push('Next question?');
-  parts.push('...');
+
+  // Second question
+  parts.push('What does "enormous" mean?');
+  if (optionsCount === 4) {
+    parts.push('Small');
+    parts.push('Tiny');
+    parts.push('*Very large');
+    parts.push('Medium');
+  } else {
+    parts.push('Small');
+    parts.push('Tiny');
+    parts.push('*Very large');
+    parts.push('Medium');
+    parts.push('Average');
+    parts.push('Minimal');
+  }
+
+  if (includeExamples) {
+    parts.push('Example: The elephant was enormous');
+    if (examplesCount >= 2) {
+      parts.push('Example: They live in an enormous house');
+    }
+    for (let i = 3; i <= examplesCount; i++) {
+      parts.push('Example: The building was enormous');
+    }
+  }
+
   parts.push('```');
+  parts.push('');
+
+  // Wrong format examples - critical for less capable AI
+  parts.push('WRONG FORMAT (DO NOT DO THIS):');
+  parts.push('');
+  parts.push('Wrong - using letters:');
+  parts.push('A) Berlin');
+  parts.push('B) Madrid');
+  parts.push('C) Paris <- correct');
+  parts.push('D) Rome');
+  parts.push('');
+  parts.push('Wrong - using "*correct":');
+  parts.push('Berlin');
+  parts.push('Madrid');
+  parts.push('*correct');
+  parts.push('Rome');
+  parts.push('');
+  parts.push('Wrong - not marking answer:');
+  parts.push('Berlin');
+  parts.push('Madrid');
+  parts.push('Paris');
+  parts.push('Rome');
   parts.push('');
 
   // Requirements
   parts.push('REQUIREMENTS:');
   parts.push(`- Create exactly ${questionsCount} questions`);
-  parts.push(`- Each question must have exactly ${optionsCount} answer options (${optionLetters})`);
-  parts.push('- Only ONE correct answer (marked with *)');
+  parts.push(`- Each question must have exactly ${optionsCount} answer options`);
+  parts.push('- Only ONE correct answer per question (marked with *)');
   parts.push('- Separate questions with an empty line');
-  parts.push('- The * symbol must be at the very beginning of the correct answer line');
+  parts.push('- The * must be at the very beginning of the correct answer line');
+  parts.push('- Write FULL ANSWER TEXT after *, like "*Paris" not "*C"');
 
   if (includeExamples) {
     parts.push(`- Add ${examplesCount} example(s) after the answer options`);
-    parts.push('- Examples should illustrate the correct answer usage');
+    parts.push('- Examples should illustrate the correct answer in context');
   }
 
   // Additional instructions
@@ -153,12 +204,16 @@ function buildPrompt(config) {
 
   if (outputType === 'file') {
     parts.push('Create a downloadable .txt file with the test content.');
-    parts.push('File name should be based on the topic (e.g., "phrasal_verbs_test.txt").');
-    parts.push('Do NOT add any explanations or comments - ONLY the test content in the file.');
+    parts.push('File name should be based on the topic.');
+    parts.push('Do NOT add any explanations - ONLY the test content.');
   } else {
-    parts.push('Provide ONLY the test text without explanations, ready for copying.');
-    parts.push('Do NOT add any prefixes, suffixes, or comments.');
+    parts.push('Provide ONLY the test text, ready for copying.');
+    parts.push('Do NOT add any prefixes, explanations, or comments.');
   }
+
+  // Final reminder for less capable AI
+  parts.push('');
+  parts.push('REMEMBER: Each answer = COMPLETE TEXT. Correct answer = * + full text (e.g., "*Paris")');
 
   return parts.join('\n');
 }

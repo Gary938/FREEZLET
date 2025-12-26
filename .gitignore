@@ -20,6 +20,8 @@ MyBackground/*
 !MyBackground/.gitkeep
 Progress/*
 !Progress/.gitkeep
+Tests/*
+!Tests/.gitkeep
 
 # OS files
 .DS_Store

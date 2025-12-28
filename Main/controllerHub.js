@@ -28,6 +28,9 @@ import { testRunnerController } from './Controllers/TestRunner/testRunnerControl
 // Import learn mode controller
 import { learnModeController } from './Controllers/LearnMode/learnModeController.js';
 
+// Import shell controller
+import { shellController } from './Controllers/ShellController/shellController.js';
+
 // Log successful controller loading
 logger.info('Initializing controllerHub');
 
@@ -66,7 +69,10 @@ export const controllers = {
   testRunner: testRunnerController,
   
   // Learn mode controller
-  learnMode: learnModeController
+  learnMode: learnModeController,
+
+  // Shell controller
+  shell: shellController
 };
 
 // Log successful loading

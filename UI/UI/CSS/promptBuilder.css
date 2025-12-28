@@ -580,3 +580,258 @@
     min-width: 120px;
   }
 }
+
+/* ========================================
+   Instruction Modal - After Copy
+   ======================================== */
+
+/* === Instruction Modal Overlay === */
+.instruction-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2100;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.instruction-modal-overlay.active {
+  opacity: 1;
+}
+
+/* === Instruction Modal Container === */
+.instruction-modal {
+  background: linear-gradient(180deg, #1a1a2e 0%, #0d0d1a 100%);
+  border: 1px solid #9966cc;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 580px;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(153, 102, 204, 0.3);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.instruction-modal-overlay.active .instruction-modal {
+  transform: scale(1);
+}
+
+/* === Instruction Modal Header === */
+.instruction-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #333;
+  background: linear-gradient(180deg, #2a1a4a 0%, #1a1a2e 100%);
+}
+
+.instruction-modal-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #cc99ff;
+}
+
+.instruction-modal-close {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.instruction-modal-close:hover {
+  color: #cc99ff;
+}
+
+/* === Instruction Modal Body === */
+.instruction-modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Success message */
+.instruction-success {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: linear-gradient(90deg, rgba(102, 204, 153, 0.15) 0%, transparent 100%);
+  border-left: 3px solid #66cc99;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #99ffcc;
+}
+
+.instruction-checkmark {
+  font-size: 20px;
+}
+
+/* Step styling */
+.instruction-step {
+  margin-bottom: 16px;
+}
+
+.instruction-step-header {
+  font-size: 14px;
+  font-weight: 600;
+  color: #cc99ff;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.instruction-step-content {
+  color: #bbb;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-left: 8px;
+}
+
+/* AI links */
+.instruction-ai-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 8px;
+}
+
+.ai-link {
+  color: #88ccff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.ai-link:hover {
+  color: #aaddff;
+  text-decoration: underline;
+}
+
+/* Options (A/B) */
+.instruction-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.instruction-option {
+  background: rgba(153, 102, 204, 0.1);
+  border: 1px solid #4a3a6a;
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+
+.instruction-option-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #cc99ff;
+  margin-bottom: 8px;
+}
+
+.instruction-option-steps {
+  margin: 0;
+  padding-left: 20px;
+  color: #bbb;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.instruction-option-steps li {
+  margin-bottom: 2px;
+}
+
+/* Done message */
+.instruction-done {
+  text-align: center;
+  padding: 12px;
+  background: linear-gradient(90deg, transparent 0%, rgba(102, 204, 153, 0.1) 50%, transparent 100%);
+  border-radius: 4px;
+  color: #99ffcc;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 16px;
+}
+
+/* === Instruction Modal Footer === */
+.instruction-modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-top: 1px solid #333;
+  background: linear-gradient(180deg, #1a1a2e 0%, #0d0d1a 100%);
+}
+
+/* Checkbox */
+.instruction-checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.instruction-checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: #9966cc;
+  cursor: pointer;
+}
+
+.instruction-checkbox-label {
+  font-size: 13px;
+  color: #888;
+}
+
+/* OK button */
+.instruction-btn-ok {
+  background: linear-gradient(180deg, #2a6a4a 0%, #1a4030 100%);
+  border: 1px solid #66cc99;
+  color: #99ffcc;
+  padding: 10px 32px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.instruction-btn-ok:hover {
+  background: linear-gradient(180deg, #3a8a6a 0%, #2a5040 100%);
+  box-shadow: 0 4px 12px rgba(102, 204, 153, 0.3);
+}
+
+/* === Instruction Modal Responsive === */
+@media (max-width: 640px) {
+  .instruction-modal {
+    width: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .instruction-modal-footer {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .instruction-btn-ok {
+    width: 100%;
+  }
+}

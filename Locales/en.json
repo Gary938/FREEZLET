@@ -141,6 +141,28 @@
     "copy": "Copy to Clipboard",
     "cancel": "Cancel",
     "preview": "Preview",
-    "copied": "Copied!"
+    "copied": "Copied!",
+    "instruction": {
+      "title": "Prompt Copied! What's Next?",
+      "copied": "Prompt copied to clipboard!",
+      "step1": "Step 1: Open any AI assistant",
+      "step2": "Step 2: Paste the prompt",
+      "step2a": "Press Ctrl+V (or Cmd+V on Mac)",
+      "step2b": "Or right-click → Paste",
+      "step3": "Step 3: Get the response from AI",
+      "step3text": "Wait for AI to generate the test questions.",
+      "step4": "Step 4: Load the test into FREEZLET",
+      "optionA": "Option A — Copy-paste method:",
+      "optionA1": "Copy the AI response",
+      "optionA2": "Click [Create Test] button",
+      "optionA3": "Enter test name → click Next",
+      "optionA4": "Paste content → click Save",
+      "optionB": "Option B — File download method:",
+      "optionB1": "If you selected \"Generate TXT file\", download the file from AI",
+      "optionB2": "Click [Load New Test] button",
+      "optionB3": "Select the downloaded .txt file",
+      "done": "Done! Your test is ready to use.",
+      "dontShowAgain": "Don't show this again"
+    }
   }
 }

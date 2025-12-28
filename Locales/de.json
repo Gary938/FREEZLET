@@ -141,6 +141,28 @@
     "copy": "Kopieren",
     "cancel": "Abbrechen",
     "preview": "Vorschau",
-    "copied": "Kopiert!"
+    "copied": "Kopiert!",
+    "instruction": {
+      "title": "Prompt kopiert! Was kommt als Nächstes?",
+      "copied": "Prompt in die Zwischenablage kopiert!",
+      "step1": "Schritt 1: Öffnen Sie einen KI-Assistenten",
+      "step2": "Schritt 2: Fügen Sie den Prompt ein",
+      "step2a": "Drücken Sie Strg+V (oder Cmd+V auf Mac)",
+      "step2b": "Oder Rechtsklick → Einfügen",
+      "step3": "Schritt 3: Antwort von der KI erhalten",
+      "step3text": "Warten Sie, bis die KI die Testfragen generiert.",
+      "step4": "Schritt 4: Test in FREEZLET laden",
+      "optionA": "Option A — Kopieren-Einfügen-Methode:",
+      "optionA1": "Kopieren Sie die KI-Antwort",
+      "optionA2": "Klicken Sie auf [Create Test]",
+      "optionA3": "Testnamen eingeben → Next klicken",
+      "optionA4": "Inhalt einfügen → Save klicken",
+      "optionB": "Option B — Datei-Download-Methode:",
+      "optionB1": "Wenn Sie \"Generate TXT file\" gewählt haben, laden Sie die Datei von der KI herunter",
+      "optionB2": "Klicken Sie auf [Load New Test]",
+      "optionB3": "Wählen Sie die heruntergeladene .txt-Datei",
+      "done": "Fertig! Ihr Test ist einsatzbereit.",
+      "dontShowAgain": "Nicht mehr anzeigen"
+    }
   }
 }

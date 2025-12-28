@@ -59,7 +59,10 @@ const electronAPI = {
       'controller:learnMode:selectMyBackground',
       'controller:learnMode:getMyBackgroundSettings',
       'controller:learnMode:setMyBackgroundRandomMode',
-      'controller:learnMode:deleteMyBackgrounds'
+      'controller:learnMode:deleteMyBackgrounds',
+
+      // Shell channels (for opening external URLs)
+      'controller:shell:openExternal'
     ];
 
     if (allowedChannels.includes(channel)) {
@@ -290,13 +293,26 @@ const learnModeAPI = {
   }
 };
 
+// API for shell operations (opening external URLs)
+const shellAPI = {
+  /**
+   * Opens URL in default browser
+   * @param {string} url - URL to open (only whitelisted domains allowed)
+   * @returns {Promise<Object>} Operation result
+   */
+  openExternal: (url) => {
+    return ipcRenderer.invoke('controller:shell:openExternal', url);
+  }
+};
+
 // Export API
 contextBridge.exposeInMainWorld("electron", {
   logger: logHandler,
   categories: categoriesAPI,
   tests: testsAPI,
   testRunner: testRunnerAPI,
-  learnMode: learnModeAPI
+  learnMode: learnModeAPI,
+  shell: shellAPI
 });
 
 // Export API for controllers

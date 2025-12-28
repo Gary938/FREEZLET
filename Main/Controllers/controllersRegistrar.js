@@ -342,6 +342,9 @@ export async function setupControllersIPC() {
     withBrowserWindow(controllers.learnMode.loadMyBackground.bind(controllers.learnMode))
   );
 
+  // Register shell controller for opening external URLs
+  registerControllerMethods('shell', controllers.shell);
+
   logger.success('Controllers successfully registered');
 }
 

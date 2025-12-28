@@ -8,6 +8,7 @@ import {
   removePromptBuilderModal
 } from './promptBuilderRenderer.js';
 import { generatePrompt } from '../../../Controllers/PromptBuilder/promptGeneratorService.js';
+import { shouldShowInstruction, showInstructionModal } from './instructionModal.js';
 
 let currentOverlay = null;
 let currentOnClose = null;
@@ -142,9 +143,14 @@ async function handleCopyClick() {
     showCopiedState();
   }
 
-  // Close modal after showing "Copied" state
+  // Close prompt builder modal
   setTimeout(() => {
     handleClose(currentOnClose);
+
+    // Show instruction modal if not hidden
+    if (shouldShowInstruction()) {
+      showInstructionModal();
+    }
   }, 500);
 }
 

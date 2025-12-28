@@ -141,6 +141,28 @@
     "copy": "Kopiuj",
     "cancel": "Anuluj",
     "preview": "Podgląd",
-    "copied": "Skopiowano!"
+    "copied": "Skopiowano!",
+    "instruction": {
+      "title": "Prompt skopiowany! Co dalej?",
+      "copied": "Prompt skopiowany do schowka!",
+      "step1": "Krok 1: Otwórz dowolnego asystenta AI",
+      "step2": "Krok 2: Wklej prompt",
+      "step2a": "Naciśnij Ctrl+V (lub Cmd+V na Mac)",
+      "step2b": "Lub kliknij prawym przyciskiem → Wklej",
+      "step3": "Krok 3: Uzyskaj odpowiedź od AI",
+      "step3text": "Poczekaj, aż AI wygeneruje pytania testowe.",
+      "step4": "Krok 4: Załaduj test do FREEZLET",
+      "optionA": "Opcja A — Metoda kopiuj-wklej:",
+      "optionA1": "Skopiuj odpowiedź AI",
+      "optionA2": "Kliknij przycisk [Create Test]",
+      "optionA3": "Wprowadź nazwę testu → kliknij Next",
+      "optionA4": "Wklej treść → kliknij Save",
+      "optionB": "Opcja B — Metoda pobierania pliku:",
+      "optionB1": "Jeśli wybrałeś \"Generate TXT file\", pobierz plik od AI",
+      "optionB2": "Kliknij przycisk [Load New Test]",
+      "optionB3": "Wybierz pobrany plik .txt",
+      "done": "Gotowe! Twój test jest gotowy do użycia.",
+      "dontShowAgain": "Nie pokazuj ponownie"
+    }
   }
 }

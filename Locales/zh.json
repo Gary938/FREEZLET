@@ -141,6 +141,28 @@
     "copy": "复制",
     "cancel": "取消",
     "preview": "预览",
-    "copied": "已复制！"
+    "copied": "已复制！",
+    "instruction": {
+      "title": "提示词已复制！接下来怎么做？",
+      "copied": "提示词已复制到剪贴板！",
+      "step1": "步骤1：打开任意AI助手",
+      "step2": "步骤2：粘贴提示词",
+      "step2a": "按 Ctrl+V（Mac上按 Cmd+V）",
+      "step2b": "或右键点击 → 粘贴",
+      "step3": "步骤3：获取AI的回复",
+      "step3text": "等待AI生成测试问题。",
+      "step4": "步骤4：将测试加载到FREEZLET",
+      "optionA": "选项A — 复制粘贴方式：",
+      "optionA1": "复制AI的回复",
+      "optionA2": "点击 [Create Test] 按钮",
+      "optionA3": "输入测试名称 → 点击 Next",
+      "optionA4": "粘贴内容 → 点击 Save",
+      "optionB": "选项B — 文件下载方式：",
+      "optionB1": "如果选择了\"Generate TXT file\"，请从AI下载文件",
+      "optionB2": "点击 [Load New Test] 按钮",
+      "optionB3": "选择下载的 .txt 文件",
+      "done": "完成！您的测试已准备就绪。",
+      "dontShowAgain": "不再显示"
+    }
   }
 }

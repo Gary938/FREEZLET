@@ -141,6 +141,28 @@
     "copy": "Copiar",
     "cancel": "Cancelar",
     "preview": "Vista previa",
-    "copied": "¡Copiado!"
+    "copied": "¡Copiado!",
+    "instruction": {
+      "title": "¡Prompt copiado! ¿Qué sigue?",
+      "copied": "¡Prompt copiado al portapapeles!",
+      "step1": "Paso 1: Abra cualquier asistente de IA",
+      "step2": "Paso 2: Pegue el prompt",
+      "step2a": "Presione Ctrl+V (o Cmd+V en Mac)",
+      "step2b": "O clic derecho → Pegar",
+      "step3": "Paso 3: Obtenga la respuesta de la IA",
+      "step3text": "Espere a que la IA genere las preguntas del test.",
+      "step4": "Paso 4: Cargue el test en FREEZLET",
+      "optionA": "Opción A — Método copiar-pegar:",
+      "optionA1": "Copie la respuesta de la IA",
+      "optionA2": "Haga clic en el botón [Create Test]",
+      "optionA3": "Ingrese el nombre del test → clic en Next",
+      "optionA4": "Pegue el contenido → clic en Save",
+      "optionB": "Opción B — Método de descarga:",
+      "optionB1": "Si seleccionó \"Generate TXT file\", descargue el archivo de la IA",
+      "optionB2": "Haga clic en el botón [Load New Test]",
+      "optionB3": "Seleccione el archivo .txt descargado",
+      "done": "¡Listo! Su test está listo para usar.",
+      "dontShowAgain": "No mostrar esto de nuevo"
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "freezlet",
   "productName": "FREEZLET",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Desktop quiz application with gamified learning mode built on Electron",
   "license": "MIT",
   "author": {

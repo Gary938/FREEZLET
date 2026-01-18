@@ -1,0 +1,79 @@
+8×1=
+seven
+*eight
+nine
+ten
+Example: eight
+Example: eight
+
+8×2=
+fifteen
+*sixteen
+seventeen
+eighteen
+Example: sixteen
+Example: sixteen
+
+8×3=
+twenty-three
+*twenty-four
+twenty-five
+twenty-six
+Example: twenty-four
+Example: twenty-four
+
+8×4=
+thirty-one
+*thirty-two
+thirty-three
+thirty-four
+Example: thirty-two
+Example: thirty-two
+
+8×5=
+thirty-nine
+*forty
+forty-one
+forty-two
+Example: forty
+Example: forty
+
+8×6=
+forty-seven
+*forty-eight
+forty-nine
+fifty
+Example: forty-eight
+Example: forty-eight
+
+8×7=
+fifty-five
+*fifty-six
+fifty-seven
+fifty-eight
+Example: fifty-six
+Example: fifty-six
+
+8×8=
+sixty-three
+*sixty-four
+sixty-five
+sixty-six
+Example: sixty-four
+Example: sixty-four
+
+8×9=
+seventy-one
+*seventy-two
+seventy-three
+seventy-four
+Example: seventy-two
+Example: seventy-two
+
+8×10=
+seventy-nine
+*eighty
+eighty-one
+eighty-two
+Example: eighty
+Example: eighty

@@ -21,8 +21,10 @@ MyBackground/*
 Progress/*
 !Progress/.gitkeep
 !Progress/structure.db
+
+# Tests - keep only DEMO for binary builds
 Tests/*
-!Tests/.gitkeep
+!Tests/DEMO/
 
 # OS files
 .DS_Store

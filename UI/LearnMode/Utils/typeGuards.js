@@ -21,7 +21,7 @@ export const TYPE_VALIDATORS = {
     command: (value) => ['move', 'stay'].includes(value),
     currentPath: (value) => typeof value === 'string',
     mode: (value) => ['story', 'random', 'custom'].includes(value),
-    type: (value) => ['question', 'next_block', 'final_stats'].includes(value)
+    type: (value) => ['question', 'next_block', 'final_stats', 'error'].includes(value)
 };
 
 // OPERATIONS

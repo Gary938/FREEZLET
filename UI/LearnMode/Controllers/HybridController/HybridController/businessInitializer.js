@@ -27,8 +27,17 @@ export const startBusinessTest = async (businessBridge, testPath) => {
     if (!businessData.success) {
         // Format error message properly
         const errorMsg = businessData.error?.message
-            || (typeof businessData.error === 'string' ? businessData.error : JSON.stringify(businessData.error));
-        console.error('[startBusinessTest] Failed:', { testPath, error: businessData.error });
+            || businessData.error?.code
+            || businessData.data?.message
+            || businessData.data?.code
+            || (typeof businessData.error === 'string' ? businessData.error : JSON.stringify(businessData.error || businessData));
+        console.error('[startBusinessTest] Failed:', { testPath, error: businessData.error, fullResponse: businessData });
+        throw new Error(`START_TEST_FAILED: ${errorMsg}`);
+    }
+    // Check for error type response
+    if (businessData.type === 'error') {
+        const errorMsg = businessData.data?.message || businessData.data?.code || 'Unknown error';
+        console.error('[startBusinessTest] Error response:', { testPath, data: businessData.data });
         throw new Error(`START_TEST_FAILED: ${errorMsg}`);
     }
     return businessData;

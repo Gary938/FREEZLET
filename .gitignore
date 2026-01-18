@@ -20,6 +20,7 @@ MyBackground/*
 !MyBackground/.gitkeep
 Progress/*
 !Progress/.gitkeep
+!Progress/structure.db
 Tests/*
 !Tests/.gitkeep
 
